@@ -4,6 +4,8 @@ An interactive dashboard of the global hydrogen market, built from the IEA **Glo
 
 ![Dashboard screenshot](docs/screenshot.png)
 
+**Demo video:** [`docs/demo.mp4`](docs/demo.mp4) (3 minutes, 1080p, subtitles only)
+
 ## What's in the dashboard
 
 | Section | What it shows |
@@ -63,6 +65,13 @@ To rebuild the data (needs Python with pdfplumber and the report PDF):
 ```bash
 python scripts/build_data.py data
 node scripts/build_world_shapes.mjs . data/world_shapes.json   # needs world-atlas, topojson-client and d3-geo
+```
+
+To record the demo video again (needs Playwright with Chromium and ffmpeg):
+
+```bash
+node preview/server.js &
+node preview/record_demo.js docs/demo.mp4
 ```
 
 The page was written for a Claude Artifacts dashboard, which provides a small `dash` runtime (data loading, calculated values, drawings) and the `d3` global. `preview/server.js` supplies a minimal stand-in so the page runs anywhere.

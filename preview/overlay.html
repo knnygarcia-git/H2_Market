@@ -1,0 +1,37 @@
+<style>
+#cap { position: fixed; left: 24px; bottom: 24px; width: calc(100% - 330px); background: rgba(16, 18, 24, .88); color: #fff;
+  font: 500 19px/1.45 'Poppins', sans-serif; padding: 14px 22px; border-radius: 12px; z-index: 99; transition: opacity .35s; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+#cap:empty { opacity: 0; }
+#card { position: fixed; inset: 0; z-index: 100; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; transition: opacity .6s; font-family: 'Poppins', sans-serif; text-align: center; }
+#card.off { opacity: 0; pointer-events: none; }
+#card .k { font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: #626875; font-weight: 600; }
+#card h1 { margin: 0; font-size: 56px; font-weight: 700; letter-spacing: -.03em; color: #14204a; }
+#card h1 span { color: #00a99d; }
+#card p { margin: 0; font-size: 18px; color: #626875; max-width: 760px; }
+#card .bar { width: 360px; height: 10px; border-radius: 99px; overflow: hidden; display: flex; margin-top: 8px; }
+#card .by { display: flex; align-items: center; gap: 12px; margin-top: 28px; padding: 10px 18px 10px 10px; border: 1px solid #e3e6ec; border-radius: 999px; }
+#card .by img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+#card .by b { display: block; font-size: 15px; color: #14204a; text-align: left; } #card .by span { display: block; font-size: 13px; color: #626875; text-align: left; }
+.li { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; background: #0a66c2; color: #fff; font: 700 12px/1 Arial, sans-serif; flex: none; }
+#badge { position: fixed; bottom: 28px; right: 24px; z-index: 97; display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; background: rgba(255,255,255,.94); border: 1px solid #e3e6ec; border-radius: 999px; box-shadow: 0 6px 18px rgba(20,24,40,.12); font: 500 12px/1.2 'Poppins', sans-serif; color: #14204a; transition: opacity .5s; }
+#badge img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; } #badge small { display: flex; align-items: center; gap: 5px; color: #626875; font-size: 11px; }
+#badge.off { opacity: 0; }
+#card .prof { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+#card .prof img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 5px #fff, 0 0 0 7px #0a66c2, 0 14px 36px rgba(20,24,40,.18); }
+#card .prof .nm { font-size: 30px; font-weight: 700; color: #14204a; letter-spacing: -.01em; }
+#card .prof .hl { font-size: 15px; color: #626875; max-width: 640px; }
+#card .prof .url { display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; padding: 10px 18px; border-radius: 10px; background: #0a66c2; color: #fff; font-size: 16px; font-weight: 600; }
+#card .prof .url .li { background: #fff; color: #0a66c2; width: 22px; height: 22px; font-size: 14px; }
+#card .src { font-size: 13px; color: #8a8f99; max-width: 820px; margin-top: 18px; }
+#cursor { position: fixed; width: 22px; height: 22px; border-radius: 50%; background: rgba(21, 23, 28, .25); border: 2px solid rgba(21,23,28,.7); z-index: 98; pointer-events: none; transform: translate(-50%, -50%); transition: transform .12s; left: -50px; top: -50px; }
+#cursor.down { transform: translate(-50%, -50%) scale(.7); }
+</style>
+<div id="cap"></div>
+<div id="card"><span class="k">IEA Global Hydrogen Review 2026</span><h1>Global Hydrogen <span>Market</span></h1><p>Demand, production, electrolysers, 2030 projects, costs and investment, country by country, and where Brazil fits in</p><div class="bar"><div style="width:40%;background:#14204a"></div><div style="width:22%;background:#3d8fd6"></div><div style="width:16%;background:#00a99d"></div><div style="width:12%;background:#8cc63f"></div><div style="width:10%;background:#ffc20e"></div></div><div class="by"><img src="/me.jpg" alt=""><div><b>Kenny Yusimy Garcia Angarita</b><span>Data Analyst · linkedin.com/in/kennyyusimygarciaangarita</span></div></div></div>
+<div id="badge" class="off"><img src="/me.jpg" alt=""><div>Kenny Garcia Angarita<small><span class="li">in</span> kennyyusimygarciaangarita</small></div></div>
+<div id="cursor"></div>
+<script>
+document.addEventListener('mousemove', (e) => { const c = document.getElementById('cursor'); c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
+document.addEventListener('mousedown', () => document.getElementById('cursor').classList.add('down'));
+document.addEventListener('mouseup', () => document.getElementById('cursor').classList.remove('down'));
+</script>
