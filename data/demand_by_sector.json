@@ -1,0 +1,58 @@
+[
+ {
+  "year": 2020,
+  "estimate": false,
+  "industry_mt": 51.55,
+  "refining_mt": 38.6,
+  "new_uses_mt": 0.17,
+  "total_mt": 90.33
+ },
+ {
+  "year": 2021,
+  "estimate": false,
+  "industry_mt": 52.87,
+  "refining_mt": 40.35,
+  "new_uses_mt": 0.35,
+  "total_mt": 93.57
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "industry_mt": 52.95,
+  "refining_mt": 41.75,
+  "new_uses_mt": 0.44,
+  "total_mt": 95.14
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "industry_mt": 54.01,
+  "refining_mt": 42.98,
+  "new_uses_mt": 0.7,
+  "total_mt": 97.68
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "industry_mt": 55.41,
+  "refining_mt": 43.59,
+  "new_uses_mt": 0.79,
+  "total_mt": 99.78
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "industry_mt": 57.24,
+  "refining_mt": 44.11,
+  "new_uses_mt": 0.96,
+  "total_mt": 102.32
+ },
+ {
+  "year": 2030,
+  "estimate": true,
+  "industry_mt": 63.28,
+  "refining_mt": 45.52,
+  "new_uses_mt": 4.2,
+  "total_mt": 113.0
+ }
+]

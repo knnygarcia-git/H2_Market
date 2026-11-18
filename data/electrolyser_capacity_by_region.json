@@ -1,0 +1,50 @@
+[
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "China",
+  "gw": 2.667
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Europe",
+  "gw": 0.654
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "United States",
+  "gw": 0.439
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Rest of world",
+  "gw": 0.393
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "China",
+  "gw": 3.244
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Europe",
+  "gw": 2.654
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "United States",
+  "gw": 0.54
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Rest of world",
+  "gw": 0.586
+ }
+]

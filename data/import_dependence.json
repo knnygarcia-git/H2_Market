@@ -1,0 +1,205 @@
+[
+ {
+  "country": "India",
+  "map_name": "India",
+  "product": "Ammonia",
+  "import_share_pct": 11.7,
+  "middle_east_share_pct": 9.2
+ },
+ {
+  "country": "Morocco",
+  "map_name": "Morocco",
+  "product": "Ammonia",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 41.4
+ },
+ {
+  "country": "Korea",
+  "map_name": "South Korea",
+  "product": "Ammonia",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 46.8
+ },
+ {
+  "country": "South Africa",
+  "map_name": "South Africa",
+  "product": "Ammonia",
+  "import_share_pct": 41.8,
+  "middle_east_share_pct": 15.9
+ },
+ {
+  "country": "Türkiye",
+  "map_name": "Turkey",
+  "product": "Ammonia",
+  "import_share_pct": 24.6,
+  "middle_east_share_pct": 18.7
+ },
+ {
+  "country": "China",
+  "map_name": "China",
+  "product": "Ammonia",
+  "import_share_pct": 1.6,
+  "middle_east_share_pct": 0.2
+ },
+ {
+  "country": "Japan",
+  "map_name": "Japan",
+  "product": "Ammonia",
+  "import_share_pct": 28.5,
+  "middle_east_share_pct": 5.0
+ },
+ {
+  "country": "Thailand",
+  "map_name": "Thailand",
+  "product": "Ammonia",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 13.3
+ },
+ {
+  "country": "Brazil",
+  "map_name": "Brazil",
+  "product": "Ammonia",
+  "import_share_pct": 75.4,
+  "middle_east_share_pct": 4.2
+ },
+ {
+  "country": "India",
+  "map_name": "India",
+  "product": "Urea",
+  "import_share_pct": 18.1,
+  "middle_east_share_pct": 12.8
+ },
+ {
+  "country": "Brazil",
+  "map_name": "Brazil",
+  "product": "Urea",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 40.4
+ },
+ {
+  "country": "Australia",
+  "map_name": "Australia",
+  "product": "Urea",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 67.9
+ },
+ {
+  "country": "South Africa",
+  "map_name": "South Africa",
+  "product": "Urea",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 77.8
+ },
+ {
+  "country": "United States",
+  "map_name": "United States of America",
+  "product": "Urea",
+  "import_share_pct": 28.6,
+  "middle_east_share_pct": 13.4
+ },
+ {
+  "country": "Türkiye",
+  "map_name": "Turkey",
+  "product": "Urea",
+  "import_share_pct": 86.8,
+  "middle_east_share_pct": 50.4
+ },
+ {
+  "country": "Thailand",
+  "map_name": "Thailand",
+  "product": "Urea",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 84.2
+ },
+ {
+  "country": "Bangladesh",
+  "map_name": "Bangladesh",
+  "product": "Urea",
+  "import_share_pct": 38.0,
+  "middle_east_share_pct": 37.5
+ },
+ {
+  "country": "Mexico",
+  "map_name": "Mexico",
+  "product": "Urea",
+  "import_share_pct": 91.9,
+  "middle_east_share_pct": 33.2
+ },
+ {
+  "country": "New Zealand",
+  "map_name": "New Zealand",
+  "product": "Urea",
+  "import_share_pct": 69.3,
+  "middle_east_share_pct": 40.9
+ },
+ {
+  "country": "Sri Lanka",
+  "map_name": "Sri Lanka",
+  "product": "Urea",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 88.9
+ },
+ {
+  "country": "China",
+  "map_name": "China",
+  "product": "Methanol",
+  "import_share_pct": 16.1,
+  "middle_east_share_pct": 11.5
+ },
+ {
+  "country": "India",
+  "map_name": "India",
+  "product": "Methanol",
+  "import_share_pct": 95.9,
+  "middle_east_share_pct": 93.0
+ },
+ {
+  "country": "Japan",
+  "map_name": "Japan",
+  "product": "Methanol",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 48.8
+ },
+ {
+  "country": "Korea",
+  "map_name": "South Korea",
+  "product": "Methanol",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 31.2
+ },
+ {
+  "country": "Malaysia",
+  "map_name": "Malaysia",
+  "product": "Methanol",
+  "import_share_pct": 23.5,
+  "middle_east_share_pct": 23.0
+ },
+ {
+  "country": "Indonesia",
+  "map_name": "Indonesia",
+  "product": "Methanol",
+  "import_share_pct": 62.0,
+  "middle_east_share_pct": 28.0
+ },
+ {
+  "country": "Thailand",
+  "map_name": "Thailand",
+  "product": "Methanol",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 64.7
+ },
+ {
+  "country": "Singapore",
+  "map_name": "Singapore",
+  "product": "Methanol",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 55.2
+ },
+ {
+  "country": "Netherlands",
+  "map_name": "Netherlands",
+  "product": "Methanol",
+  "import_share_pct": 100,
+  "middle_east_share_pct": 14.5
+ }
+]

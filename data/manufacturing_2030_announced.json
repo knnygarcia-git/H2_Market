@@ -1,0 +1,16 @@
+[
+ {
+  "edition": "GHR 2025",
+  "committed_gw": 58.41,
+  "announced_gw": 63.47,
+  "idle_or_unspecified_gw": 67.1,
+  "total_gw": 188.97
+ },
+ {
+  "edition": "GHR 2026",
+  "committed_gw": 63.99,
+  "announced_gw": 24.92,
+  "idle_or_unspecified_gw": 6.23,
+  "total_gw": 95.13
+ }
+]

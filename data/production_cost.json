@@ -1,0 +1,93 @@
+[
+ {
+  "pathway": "Natural gas",
+  "year": 2022,
+  "low_usd_kg": 1.22,
+  "high_usd_kg": 9.19,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Natural gas",
+  "year": 2025,
+  "low_usd_kg": 0.94,
+  "high_usd_kg": 4.39,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Natural gas",
+  "year": 2030,
+  "low_usd_kg": 0.62,
+  "high_usd_kg": 3.68,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Natural gas with CCUS",
+  "year": 2022,
+  "low_usd_kg": 1.88,
+  "high_usd_kg": 10.17,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Natural gas with CCUS",
+  "year": 2025,
+  "low_usd_kg": 1.54,
+  "high_usd_kg": 4.91,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Natural gas with CCUS",
+  "year": 2030,
+  "low_usd_kg": 1.12,
+  "high_usd_kg": 4.55,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Coal",
+  "year": 2025,
+  "low_usd_kg": 1.33,
+  "high_usd_kg": 4.44,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Coal",
+  "year": 2030,
+  "low_usd_kg": 1.34,
+  "high_usd_kg": 4.95,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Coal with CCUS",
+  "year": 2025,
+  "low_usd_kg": 1.7,
+  "high_usd_kg": 4.72,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Coal with CCUS",
+  "year": 2030,
+  "low_usd_kg": 1.68,
+  "high_usd_kg": 4.44,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Onshore wind electrolysis",
+  "year": 2030,
+  "low_usd_kg": 1.98,
+  "high_usd_kg": 9.95,
+  "source": "Figure 3.20"
+ },
+ {
+  "pathway": "Renewable electrolysis",
+  "year": 2025,
+  "low_usd_kg": 3.0,
+  "high_usd_kg": 12.0,
+  "source": "Text p. 111: over USD 3/kg to well above USD 10/kg; chart capped at 12"
+ },
+ {
+  "pathway": "Renewable electrolysis, best sites",
+  "year": 2030,
+  "low_usd_kg": 2.0,
+  "high_usd_kg": 4.0,
+  "source": "Text p. 112: below USD 2/kg in northern China; just above 3 and below 4 in the Middle East, India and Chile"
+ }
+]

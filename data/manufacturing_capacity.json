@@ -1,0 +1,182 @@
+[
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "China",
+  "gw_per_year": 7.084
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Europe",
+  "gw_per_year": 2.396
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "United States",
+  "gw_per_year": 2.24
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "India",
+  "gw_per_year": 0.833
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Rest of world",
+  "gw_per_year": 0.99
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Idle",
+  "gw_per_year": 0
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "China",
+  "gw_per_year": 21.148
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Europe",
+  "gw_per_year": 4.271
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "United States",
+  "gw_per_year": 3.75
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "India",
+  "gw_per_year": 0.781
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Rest of world",
+  "gw_per_year": 1.094
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Idle",
+  "gw_per_year": 1.979
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "China",
+  "gw_per_year": 28.753
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Europe",
+  "gw_per_year": 6.824
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "United States",
+  "gw_per_year": 3.802
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "India",
+  "gw_per_year": 2.292
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Rest of world",
+  "gw_per_year": 2.031
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Idle",
+  "gw_per_year": 1.979
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "China",
+  "gw_per_year": 36.254
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Europe",
+  "gw_per_year": 7.397
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "United States",
+  "gw_per_year": 5.417
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "India",
+  "gw_per_year": 2.552
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Rest of world",
+  "gw_per_year": 1.146
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Idle",
+  "gw_per_year": 5.261
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "China",
+  "gw_per_year": 38.285
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Europe",
+  "gw_per_year": 7.813
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "United States",
+  "gw_per_year": 6.459
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "India",
+  "gw_per_year": 3.854
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Rest of world",
+  "gw_per_year": 1.563
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Idle",
+  "gw_per_year": 6.303
+ }
+]

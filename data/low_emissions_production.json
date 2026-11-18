@@ -1,0 +1,254 @@
+[
+ {
+  "year": 2021,
+  "estimate": false,
+  "region": "United States",
+  "fossil_ccus_mt": 0.325,
+  "electrolysis_mt": 0.004
+ },
+ {
+  "year": 2021,
+  "estimate": false,
+  "region": "Canada",
+  "fossil_ccus_mt": 0.176,
+  "electrolysis_mt": 0.002
+ },
+ {
+  "year": 2021,
+  "estimate": false,
+  "region": "Europe",
+  "fossil_ccus_mt": 0,
+  "electrolysis_mt": 0.009
+ },
+ {
+  "year": 2021,
+  "estimate": false,
+  "region": "China",
+  "fossil_ccus_mt": 0.006,
+  "electrolysis_mt": 0.007
+ },
+ {
+  "year": 2021,
+  "estimate": false,
+  "region": "Middle East",
+  "fossil_ccus_mt": 0.071,
+  "electrolysis_mt": 0.001
+ },
+ {
+  "year": 2021,
+  "estimate": false,
+  "region": "Rest of world",
+  "fossil_ccus_mt": 0,
+  "electrolysis_mt": 0.012
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "United States",
+  "fossil_ccus_mt": 0.325,
+  "electrolysis_mt": 0.005
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Canada",
+  "fossil_ccus_mt": 0.176,
+  "electrolysis_mt": 0.002
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Europe",
+  "fossil_ccus_mt": 0,
+  "electrolysis_mt": 0.013
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "China",
+  "fossil_ccus_mt": 0.027,
+  "electrolysis_mt": 0.012
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Middle East",
+  "fossil_ccus_mt": 0.071,
+  "electrolysis_mt": 0.001
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Rest of world",
+  "fossil_ccus_mt": 0,
+  "electrolysis_mt": 0.014
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "United States",
+  "fossil_ccus_mt": 0.325,
+  "electrolysis_mt": 0.007
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Canada",
+  "fossil_ccus_mt": 0.176,
+  "electrolysis_mt": 0.002
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Europe",
+  "fossil_ccus_mt": 0,
+  "electrolysis_mt": 0.017
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "China",
+  "fossil_ccus_mt": 0.05,
+  "electrolysis_mt": 0.026
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Middle East",
+  "fossil_ccus_mt": 0.071,
+  "electrolysis_mt": 0.001
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Rest of world",
+  "fossil_ccus_mt": 0,
+  "electrolysis_mt": 0.016
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "United States",
+  "fossil_ccus_mt": 0.325,
+  "electrolysis_mt": 0.008
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Canada",
+  "fossil_ccus_mt": 0.176,
+  "electrolysis_mt": 0.002
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Europe",
+  "fossil_ccus_mt": 0.001,
+  "electrolysis_mt": 0.026
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "China",
+  "fossil_ccus_mt": 0.056,
+  "electrolysis_mt": 0.052
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Middle East",
+  "fossil_ccus_mt": 0.071,
+  "electrolysis_mt": 0.001
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Rest of world",
+  "fossil_ccus_mt": 0,
+  "electrolysis_mt": 0.019
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "United States",
+  "fossil_ccus_mt": 0.399,
+  "electrolysis_mt": 0.017
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Canada",
+  "fossil_ccus_mt": 0.176,
+  "electrolysis_mt": 0.002
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Europe",
+  "fossil_ccus_mt": 0.001,
+  "electrolysis_mt": 0.041
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "China",
+  "fossil_ccus_mt": 0.058,
+  "electrolysis_mt": 0.094
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Middle East",
+  "fossil_ccus_mt": 0.071,
+  "electrolysis_mt": 0.001
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Rest of world",
+  "fossil_ccus_mt": 0.001,
+  "electrolysis_mt": 0.024
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "United States",
+  "fossil_ccus_mt": 0.501,
+  "electrolysis_mt": 0.034
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Canada",
+  "fossil_ccus_mt": 0.176,
+  "electrolysis_mt": 0.002
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Europe",
+  "fossil_ccus_mt": 0.012,
+  "electrolysis_mt": 0.079
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "China",
+  "fossil_ccus_mt": 0.058,
+  "electrolysis_mt": 0.208
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Middle East",
+  "fossil_ccus_mt": 0.071,
+  "electrolysis_mt": 0.003
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Rest of world",
+  "fossil_ccus_mt": 0.001,
+  "electrolysis_mt": 0.031
+ }
+]

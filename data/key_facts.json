@@ -1,0 +1,177 @@
+[
+ {
+  "id": "demand_2025",
+  "label": "Hydrogen demand, 2025",
+  "value": 102.3,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 45, Figure 2.1"
+ },
+ {
+  "id": "demand_growth",
+  "label": "Demand growth in 2025",
+  "value": 3,
+  "unit": "%",
+  "source": "IEA Global Hydrogen Review 2026, p. 45"
+ },
+ {
+  "id": "co2",
+  "label": "CO2 from hydrogen production, 2025",
+  "value": 1000,
+  "unit": "Mt CO2",
+  "source": "IEA Global Hydrogen Review 2026, p. 83"
+ },
+ {
+  "id": "low_em_2025",
+  "label": "Low-emissions production, 2025",
+  "value": 0.88,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 84, Figure 3.2"
+ },
+ {
+  "id": "low_em_growth",
+  "label": "Growth in low-emissions production, 2025",
+  "value": 20,
+  "unit": "%",
+  "source": "IEA Global Hydrogen Review 2026, p. 83"
+ },
+ {
+  "id": "electrolysis_2025",
+  "label": "Installed electrolysis, 2025",
+  "value": 4.15,
+  "unit": "GW",
+  "source": "IEA Global Hydrogen Review 2026, p. 90, Figure 3.8"
+ },
+ {
+  "id": "china_share_electrolysis",
+  "label": "China share of installed electrolysis",
+  "value": 64,
+  "unit": "%",
+  "source": "IEA Global Hydrogen Review 2026, p. 90, Figure 3.8"
+ },
+ {
+  "id": "manufacturing_2025",
+  "label": "Electrolyser manufacturing capacity, 2025",
+  "value": 58,
+  "unit": "GW/yr",
+  "source": "IEA Global Hydrogen Review 2026, p. 95"
+ },
+ {
+  "id": "deployment_2030",
+  "label": "Expected yearly electrolyser deployment to 2030 (FID or strong potential)",
+  "value": 9,
+  "unit": "GW/yr",
+  "source": "IEA Global Hydrogen Review 2026, p. 95"
+ },
+ {
+  "id": "manufacturing_2030",
+  "label": "Electrolyser manufacturing capacity expected by 2030",
+  "value": 95,
+  "unit": "GW/yr",
+  "source": "IEA Global Hydrogen Review 2026, p. 96"
+ },
+ {
+  "id": "pipeline_2030",
+  "label": "Announced low-emissions production by 2030",
+  "value": 27,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 11"
+ },
+ {
+  "id": "pipeline_2030_prev",
+  "label": "Same pipeline in the 2025 review",
+  "value": 37,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 11"
+ },
+ {
+  "id": "committed_2030",
+  "label": "Committed production by 2030 (operational or FID)",
+  "value": 4.3,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 87"
+ },
+ {
+  "id": "at_risk",
+  "label": "Announced production that needs a decision by early 2027",
+  "value": 22,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 12"
+ },
+ {
+  "id": "offtake",
+  "label": "New offtake agreements, 2025",
+  "value": 1.7,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 13"
+ },
+ {
+  "id": "investment_2025",
+  "label": "Investment in low-emissions production, 2025",
+  "value": 6.65,
+  "unit": "USD bn",
+  "source": "IEA Global Hydrogen Review 2026, p. 173, Figure 6.2"
+ },
+ {
+  "id": "public_funding",
+  "label": "Public funding in policies updated since the 2025 review",
+  "value": 41,
+  "unit": "USD bn",
+  "source": "IEA Global Hydrogen Review 2026, p. 193"
+ },
+ {
+  "id": "strategies",
+  "label": "National hydrogen strategies",
+  "value": 66,
+  "unit": "countries",
+  "source": "IEA Global Hydrogen Review 2026, p. 193"
+ },
+ {
+  "id": "capex_china",
+  "label": "Electrolyser CAPEX in China, 2025",
+  "value": 820,
+  "unit": "USD/kW",
+  "source": "IEA Global Hydrogen Review 2026, p. 111"
+ },
+ {
+  "id": "capex_row",
+  "label": "Electrolyser CAPEX elsewhere, 2025",
+  "value": 2200,
+  "unit": "USD/kW",
+  "source": "IEA Global Hydrogen Review 2026, p. 111"
+ },
+ {
+  "id": "brazil_urea_imports",
+  "label": "Brazil urea imports",
+  "value": 8.3,
+  "unit": "Mt",
+  "source": "IEA Global Hydrogen Review 2026, p. 22"
+ },
+ {
+  "id": "brazil_urea_me",
+  "label": "Share of Brazil urea demand met by Middle East imports",
+  "value": 40,
+  "unit": "%",
+  "source": "IEA Global Hydrogen Review 2026, p. 22"
+ },
+ {
+  "id": "brazil_nib",
+  "label": "Nova Indústria Brasil budget, 2024-26",
+  "value": 58,
+  "unit": "USD bn",
+  "source": "IEA Global Hydrogen Review 2026, p. 209"
+ },
+ {
+  "id": "brazil_h2_projects",
+  "label": "Renewable hydrogen projects selected by Nova Indústria Brasil",
+  "value": 44,
+  "unit": "projects",
+  "source": "IEA Global Hydrogen Review 2026, p. 209"
+ },
+ {
+  "id": "pecem_loan",
+  "label": "World Bank loan for ammonia infrastructure at Pecém",
+  "value": 90,
+  "unit": "USD m",
+  "source": "IEA Global Hydrogen Review 2026, p. 177"
+ }
+]

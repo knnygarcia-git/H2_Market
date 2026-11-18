@@ -1,0 +1,258 @@
+[
+ {
+  "country": "Netherlands",
+  "map_name": "Netherlands",
+  "target_type": "capacity",
+  "operational_pct": 0.7,
+  "committed_pct": 36.8,
+  "with_strong_potential_pct": 110.7
+ },
+ {
+  "country": "Austria",
+  "map_name": "Austria",
+  "target_type": "capacity",
+  "operational_pct": 3.1,
+  "committed_pct": 17.7,
+  "with_strong_potential_pct": 23.7
+ },
+ {
+  "country": "United Kingdom",
+  "map_name": "United Kingdom",
+  "target_type": "capacity",
+  "operational_pct": 0.4,
+  "committed_pct": 3.2,
+  "with_strong_potential_pct": 21.3
+ },
+ {
+  "country": "Germany",
+  "map_name": "Germany",
+  "target_type": "capacity",
+  "operational_pct": 2.2,
+  "committed_pct": 13.3,
+  "with_strong_potential_pct": 20.0
+ },
+ {
+  "country": "Belgium",
+  "map_name": "Belgium",
+  "target_type": "capacity",
+  "operational_pct": 0.9,
+  "committed_pct": 17.6,
+  "with_strong_potential_pct": 17.6
+ },
+ {
+  "country": "Colombia",
+  "map_name": "Colombia",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 16.3
+ },
+ {
+  "country": "Paraguay",
+  "map_name": "Paraguay",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 14.5,
+  "with_strong_potential_pct": 14.5
+ },
+ {
+  "country": "Portugal",
+  "map_name": "Portugal",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 3.5,
+  "with_strong_potential_pct": 13.7
+ },
+ {
+  "country": "France",
+  "map_name": "France",
+  "target_type": "capacity",
+  "operational_pct": 1.1,
+  "committed_pct": 7.3,
+  "with_strong_potential_pct": 12.3
+ },
+ {
+  "country": "Czechia",
+  "map_name": "Czechia",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 7.5
+ },
+ {
+  "country": "Romania",
+  "map_name": "Romania",
+  "target_type": "capacity",
+  "operational_pct": 0.2,
+  "committed_pct": 6.2,
+  "with_strong_potential_pct": 6.2
+ },
+ {
+  "country": "Hungary",
+  "map_name": "Hungary",
+  "target_type": "capacity",
+  "operational_pct": 5.4,
+  "committed_pct": 5.4,
+  "with_strong_potential_pct": 5.4
+ },
+ {
+  "country": "Denmark",
+  "map_name": "Denmark",
+  "target_type": "capacity",
+  "operational_pct": 1.5,
+  "committed_pct": 1.5,
+  "with_strong_potential_pct": 1.8
+ },
+ {
+  "country": "Poland",
+  "map_name": "Poland",
+  "target_type": "capacity",
+  "operational_pct": 1.4,
+  "committed_pct": 1.6,
+  "with_strong_potential_pct": 1.6
+ },
+ {
+  "country": "Estonia",
+  "map_name": "Estonia",
+  "target_type": "capacity",
+  "operational_pct": 0.8,
+  "committed_pct": 0.8,
+  "with_strong_potential_pct": 0.8
+ },
+ {
+  "country": "Costa Rica",
+  "map_name": "Costa Rica",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Lithuania",
+  "map_name": "Lithuania",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 0.2,
+  "with_strong_potential_pct": 0.2
+ },
+ {
+  "country": "Türkiye",
+  "map_name": "Turkey",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Ecuador",
+  "map_name": "Ecuador",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Uruguay",
+  "map_name": "Uruguay",
+  "target_type": "capacity",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "United Arab Emirates",
+  "map_name": "United Arab Emirates",
+  "target_type": "production",
+  "operational_pct": 5.0,
+  "committed_pct": 5.0,
+  "with_strong_potential_pct": 5.0
+ },
+ {
+  "country": "Viet Nam",
+  "map_name": "Vietnam",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 4.6,
+  "with_strong_potential_pct": 4.6
+ },
+ {
+  "country": "India",
+  "map_name": "India",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 1.9,
+  "with_strong_potential_pct": 4.2
+ },
+ {
+  "country": "Australia",
+  "map_name": "Australia",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0.2,
+  "with_strong_potential_pct": 2.4
+ },
+ {
+  "country": "South Africa",
+  "map_name": "South Africa",
+  "target_type": "production",
+  "operational_pct": 0.4,
+  "committed_pct": 0.4,
+  "with_strong_potential_pct": 0.4
+ },
+ {
+  "country": "Korea",
+  "map_name": "South Korea",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Egypt",
+  "map_name": "Egypt",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0.5
+ },
+ {
+  "country": "Argentina",
+  "map_name": "Argentina",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Namibia",
+  "map_name": "Namibia",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Mauritania",
+  "map_name": "Mauritania",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Panama",
+  "map_name": "Panama",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ },
+ {
+  "country": "Tunisia",
+  "map_name": "Tunisia",
+  "target_type": "production",
+  "operational_pct": 0,
+  "committed_pct": 0,
+  "with_strong_potential_pct": 0
+ }
+]

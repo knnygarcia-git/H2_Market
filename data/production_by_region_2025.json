@@ -1,0 +1,32 @@
+[
+ {
+  "region": "China",
+  "mt": 31.14,
+  "share_pct": 30.4
+ },
+ {
+  "region": "North America",
+  "mt": 16.64,
+  "share_pct": 16.3
+ },
+ {
+  "region": "Middle East",
+  "mt": 14.04,
+  "share_pct": 13.7
+ },
+ {
+  "region": "India",
+  "mt": 9.78,
+  "share_pct": 9.6
+ },
+ {
+  "region": "Europe",
+  "mt": 7.45,
+  "share_pct": 7.3
+ },
+ {
+  "region": "Rest of world",
+  "mt": 23.23,
+  "share_pct": 22.7
+ }
+]

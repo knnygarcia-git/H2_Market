@@ -1,0 +1,142 @@
+[
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "United States",
+  "ccus_usd_bn": 0.057,
+  "electrolysis_usd_bn": 0.041
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "China",
+  "ccus_usd_bn": 0.131,
+  "electrolysis_usd_bn": 0.164
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Europe",
+  "ccus_usd_bn": 0.065,
+  "electrolysis_usd_bn": 0.18
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "region": "Other",
+  "ccus_usd_bn": 0.417,
+  "electrolysis_usd_bn": 0.065
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "United States",
+  "ccus_usd_bn": 0.376,
+  "electrolysis_usd_bn": 0.147
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "China",
+  "ccus_usd_bn": 0.008,
+  "electrolysis_usd_bn": 0.466
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Europe",
+  "ccus_usd_bn": 0.196,
+  "electrolysis_usd_bn": 0.262
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "region": "Other",
+  "ccus_usd_bn": 0.949,
+  "electrolysis_usd_bn": 0.09
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "United States",
+  "ccus_usd_bn": 0.695,
+  "electrolysis_usd_bn": 0.286
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "China",
+  "ccus_usd_bn": 0.008,
+  "electrolysis_usd_bn": 0.532
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Europe",
+  "ccus_usd_bn": 0.27,
+  "electrolysis_usd_bn": 0.769
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "region": "Other",
+  "ccus_usd_bn": 1.088,
+  "electrolysis_usd_bn": 0.221
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "United States",
+  "ccus_usd_bn": 1.178,
+  "electrolysis_usd_bn": 0.483
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "China",
+  "ccus_usd_bn": 0,
+  "electrolysis_usd_bn": 1.088
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Europe",
+  "ccus_usd_bn": 0.27,
+  "electrolysis_usd_bn": 1.742
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "region": "Other",
+  "ccus_usd_bn": 1.12,
+  "electrolysis_usd_bn": 0.769
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "United States",
+  "ccus_usd_bn": 1.668,
+  "electrolysis_usd_bn": 0.188
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "China",
+  "ccus_usd_bn": 0,
+  "electrolysis_usd_bn": 1.644
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Europe",
+  "ccus_usd_bn": 0.204,
+  "electrolysis_usd_bn": 3.247
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "region": "Other",
+  "ccus_usd_bn": 0.973,
+  "electrolysis_usd_bn": 2.159
+ }
+]

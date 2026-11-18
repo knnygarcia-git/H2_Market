@@ -1,0 +1,50 @@
+[
+ {
+  "year": 2021,
+  "estimate": false,
+  "alkaline_gw": 0.352,
+  "pem_gw": 0.16,
+  "other_gw": 0.046,
+  "total_gw": 0.56
+ },
+ {
+  "year": 2022,
+  "estimate": false,
+  "alkaline_gw": 0.389,
+  "pem_gw": 0.233,
+  "other_gw": 0.064,
+  "total_gw": 0.69
+ },
+ {
+  "year": 2023,
+  "estimate": false,
+  "alkaline_gw": 0.824,
+  "pem_gw": 0.302,
+  "other_gw": 0.224,
+  "total_gw": 1.35
+ },
+ {
+  "year": 2024,
+  "estimate": false,
+  "alkaline_gw": 1.153,
+  "pem_gw": 0.444,
+  "other_gw": 0.348,
+  "total_gw": 1.94
+ },
+ {
+  "year": 2025,
+  "estimate": false,
+  "alkaline_gw": 2.507,
+  "pem_gw": 0.686,
+  "other_gw": 0.961,
+  "total_gw": 4.15
+ },
+ {
+  "year": 2026,
+  "estimate": true,
+  "alkaline_gw": 4.063,
+  "pem_gw": 1.281,
+  "other_gw": 1.679,
+  "total_gw": 7.02
+ }
+]

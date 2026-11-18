@@ -1,0 +1,970 @@
+<meta name="dash-one-writer">
+<link rel="stylesheet" href="fonts.css">
+<style>
+
+/* Layout: an app shell like an analytics product: sidebar navigation, a top bar with country search, KPI cards with tick strips, then a grid of cards (main chart beside a side card). Colours carry over from the infographic version. */
+#dash-root { --dash-gutter: 0; }
+.hx { --navy: #14204a; --ink: #1d2433; --muted: #667085; --line: #eceef2; --soft: #f5f7fa; --bg: #ffffff; --page: #f2f3f6;
+  --yellow: #ffc20e; --lime: #8cc63f; --teal: #00a99d; --sky: #3d8fd6; --coral: #f26b5b; --violet: #9b6fd1; --stone: #b5bcc7;
+  --gas: #ffc20e; --coal: #6d5a4c; --oil: #d39a3a; --byp: #cfd5dc; --ccus: #3d8fd6; --elec: #00a99d;
+  --font: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  color-scheme: light; background: var(--page); color: var(--ink); font-family: var(--font);
+  display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 16px; align-items: start;
+  padding-block: 16px 24px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.hx [hidden] { display: none !important; }
+.hx *, .hx *::before, .hx *::after { box-sizing: border-box; }
+/* sidebar */
+.hx .side { position: sticky; top: 12px; background: var(--bg); border-radius: 24px; padding: 22px 14px; display: flex; flex-direction: column; gap: 18px; max-height: calc(100vh - 24px); overflow: auto; }
+.hx .logo { display: flex; align-items: center; gap: 10px; padding: 0 8px; font-weight: 700; font-size: 19px; color: var(--navy); letter-spacing: -.02em; }
+.hx .logo svg { flex: none; }
+.hx .navgroup { display: flex; flex-direction: column; gap: 2px; }
+.hx .navgroup > span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #9aa1ad; padding: 0 10px 6px; }
+.hx .navgroup a { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 12px; font-size: 13.5px; color: var(--ink); text-decoration: none; }
+.hx .navgroup a svg { flex: none; color: var(--muted); }
+.hx .navgroup a:hover { background: var(--soft); }
+.hx .navgroup a[aria-current="true"] { background: #eef0f4; font-weight: 600; color: var(--navy); }
+.hx .navgroup a[aria-current="true"] svg { color: var(--navy); }
+.hx .navgroup a:focus-visible { outline: 2px solid var(--teal); outline-offset: 1px; }
+.hx .side .sidefoot { margin-top: auto; font-size: 11.5px; color: var(--muted); line-height: 1.5; padding: 12px 10px 0; border-top: 1px solid var(--line); text-align: left; }
+/* main panel */
+.hx .main { background: var(--bg); border-radius: 24px; padding: 18px clamp(14px, 2vw, 26px) 26px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.hx .topbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.hx .search { flex: 1 1 260px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; color: var(--muted); }
+.hx .search input { border: 0; outline: 0; font: inherit; font-size: 13px; width: 100%; background: transparent; color: var(--ink); }
+.hx .search:has(input[aria-invalid="true"]) { border-color: var(--coral); }
+.hx .search:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0, 169, 157, .15); }
+.hx .search kbd { font: inherit; font-size: 11px; color: #9aa1ad; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+.hx .topchip { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--navy); background: var(--soft); border-radius: 999px; padding: 8px 14px; }
+.hx .topchip i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+.hx .user { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px 4px 4px; margin-left: auto; text-decoration: none; color: inherit; }
+.hx .user img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+.hx .user b { display: block; font-size: 13px; color: var(--navy); }
+.hx .user small { display: block; font-size: 11px; color: var(--muted); }
+.hx .crumbs { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9aa1ad; flex-wrap: wrap; }
+.hx .crumbs b { color: var(--muted); font-weight: 500; }
+.hx .crumbs b:last-child { color: var(--ink); }
+.hx .titlerow { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.hx .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 16px; border-radius: 999px; box-shadow: 0 8px 20px rgba(20, 32, 74, .22); }
+.hx .btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+/* KPI cards with tick strips */
+.hx .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.hx .kpi { border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.hx .kpi .kh { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.hx .kpi .kh i { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; flex: none; }
+.hx .kpi .kh i::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.hx .kpi .kv { font-size: 24px; font-weight: 600; color: var(--navy); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.hx .kpi .kv small { font-size: 13px; font-weight: 500; color: var(--muted); margin-left: 4px; letter-spacing: 0; }
+.hx .kpi .ticks { display: flex; gap: 2px; height: 22px; margin-top: 4px; }
+.hx .kpi .ticks span { flex: 1; border-radius: 2px; background: #e8ebf0; }
+.hx .kpi .kc { font-size: 11.5px; color: var(--muted); }
+/* card grid */
+.hx .row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 14px; align-items: stretch; }
+.hx .row.even { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hx .card .chead { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.hx .card .chead h2 { font-size: 17px; font-weight: 600; color: var(--navy); letter-spacing: -.01em; }
+.hx .card .chead p { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+.hx .card .chead p b { color: var(--ink); font-weight: 600; }
+.hx .gl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+/* table */
+.hx .tablewrap { overflow-x: auto; }
+.hx table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.hx th { text-align: left; font-weight: 500; color: var(--muted); font-size: 12px; padding: 10px 8px; border-bottom: 1px solid var(--line); background: #fafbfc; }
+.hx td { padding: 11px 8px; border-bottom: 1px solid var(--line); }
+.hx td.num, .hx th.num { text-align: right; }
+.hx td .tag { display: inline-grid; place-items: center; min-width: 30px; height: 24px; border-radius: 7px; color: #fff; font-size: 11px; font-weight: 600; margin-right: 8px; padding: 0 6px; }
+.hx td .share { display: inline-block; width: 64px; height: 6px; border-radius: 3px; background: #e8ebf0; vertical-align: middle; margin-right: 8px; overflow: hidden; }
+.hx td .share i { display: block; height: 100%; background: var(--teal); }
+.hx h1, .hx h2, .hx h3, .hx p { margin: 0; }
+.hx svg text { font-family: var(--font); }
+.hx .top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.hx h1 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 600; color: var(--navy); letter-spacing: -.03em; line-height: 1.05; }
+.hx .sub { font-size: clamp(15px, 1.6vw, 19px); color: var(--muted); margin-top: 8px; }
+.hx .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--navy); background: var(--soft); border-radius: 999px; padding: 8px 14px; }
+.hx .badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+.hx .lede { font-size: 16px; line-height: 1.65; color: var(--muted); max-width: 82ch; }
+.hx .lede b { color: var(--navy); font-weight: 600; }
+
+/* hero: number blocks + growth arrows */
+.hx .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 28px; align-items: center; }
+.hx .rows { display: flex; flex-direction: column; gap: 14px; }
+.hx .nrow { display: grid; grid-template-columns: minmax(150px, 0.8fr) minmax(0, 1.4fr); gap: 10px; }
+.hx .nrow .num { border-radius: 22px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 18px 12px; color: #fff; text-align: center; }
+.hx .nrow .num b { font-size: clamp(34px, 4.6vw, 58px); font-weight: 700; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.hx .nrow .num small { font-size: 13px; font-weight: 500; opacity: .92; margin-top: 4px; }
+.hx .nrow .txt { border-radius: 22px; border: 2px solid var(--c); padding: 16px 20px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.hx .nrow .txt h3 { font-size: 17px; font-weight: 600; color: var(--navy); }
+.hx .nrow .txt p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+.hx .nrow .txt p b { color: var(--ink); font-weight: 600; }
+.hx .nrow.alt .num { background: var(--bg); border: 2px solid var(--c); color: var(--c); }
+.hx .nrow.alt .txt { background: var(--c); border-color: var(--c); }
+.hx .nrow.alt .txt h3, .hx .nrow.alt .txt p, .hx .nrow.alt .txt p b { color: #fff; }
+.hx .arrows { position: relative; }
+.hx .arrows h3 { font-size: 14px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; text-align: center; }
+
+/* gauges */
+.hx .gauges { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.hx .gauge { background: var(--soft); border-radius: 16px; padding: 14px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.hx .gauge .g { width: 100%; max-width: 150px; }
+.hx .gauge p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.hx .gauge p b { color: var(--ink); font-weight: 600; }
+
+/* sections and cards */
+.hx .sec { display: flex; flex-direction: column; gap: 16px; }
+.hx .sec > header { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; flex-wrap: wrap; }
+.hx .sec > header h2 { font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; color: var(--navy); letter-spacing: -.02em; }
+.hx .sec > header p { font-size: 14.5px; color: var(--muted); line-height: 1.6; max-width: 70ch; margin-top: 4px; }
+.hx .sec > header p b { color: var(--ink); font-weight: 600; }
+.hx .card { border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; background: var(--bg); }
+.hx .card h3 { font-size: 15px; font-weight: 600; color: var(--navy); }
+.hx .note { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+.hx .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); gap: 18px; }
+.hx .seg { display: inline-flex; background: var(--soft); border-radius: 999px; padding: 4px; gap: 2px; }
+.hx .seg button { font: inherit; font-size: 12.5px; font-weight: 600; border: 0; border-radius: 999px; padding: 8px 16px; background: transparent; color: var(--muted); cursor: pointer; }
+.hx .seg button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.hx .seg button:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.hx .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; color: var(--muted); }
+.hx .legend span { display: inline-flex; align-items: center; gap: 7px; }
+.hx .legend i { width: 12px; height: 12px; border-radius: 50%; border: 3px solid currentColor; box-sizing: border-box; }
+.hx .chart { position: relative; }
+.hx .chart text { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.hx .chart text.lab { fill: var(--ink); font-weight: 600; }
+.hx .chart text.big { font-weight: 700; fill: var(--navy); }
+.hx .pill { position: absolute; pointer-events: none; background: var(--navy); color: #fff; border-radius: 10px; padding: 8px 12px; font-size: 12px; min-width: 11rem; z-index: 5; display: none; box-shadow: 0 10px 26px rgba(20, 32, 74, .25); font-variant-numeric: tabular-nums; }
+.hx .pill .t { font-weight: 600; margin-bottom: 4px; }
+.hx .pill .r { display: flex; align-items: center; gap: 6px; opacity: .95; }
+.hx .pill .r i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.hx .pill .r b { margin-left: auto; font-weight: 600; }
+
+/* funnel */
+.hx .funnel { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px; align-items: stretch; }
+.hx .bands { display: flex; flex-direction: column; gap: 10px; }
+.hx .band { border-radius: 18px; color: #fff; padding: 14px 18px; display: grid; grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(0, 1fr)); gap: 10px; align-items: center; }
+.hx .band .k { font-size: 12px; opacity: .9; }
+.hx .band b { display: block; font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.hx .band b small { font-size: .5em; font-weight: 500; margin-left: 3px; letter-spacing: 0; }
+
+/* factories */
+.hx .ratio { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.hx .ratio .x { font-size: clamp(40px, 5vw, 64px); font-weight: 700; color: var(--coral); letter-spacing: -.04em; line-height: 1; }
+.hx .ratio p { font-size: 13.5px; color: var(--muted); line-height: 1.55; max-width: 40ch; }
+.hx .ratio p b { color: var(--ink); font-weight: 600; }
+
+/* brazil */
+.hx .brazil { background: linear-gradient(135deg, #0f7a52 0%, #00a99d 55%, #ffc20e 140%); border-radius: 26px; padding: clamp(20px, 3vw, 34px); color: #fff; display: flex; flex-direction: column; gap: 18px; }
+.hx .brazil h2 { font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; }
+.hx .brazil > p { font-size: 15px; line-height: 1.6; opacity: .95; max-width: 75ch; }
+.hx .bfacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); gap: 12px; }
+.hx .bfact { background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .28); border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.hx .bfact b { font-size: 28px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.hx .bfact b small { font-size: .5em; font-weight: 500; margin-left: 3px; letter-spacing: 0; }
+.hx .bfact > span { font-size: 12.5px; line-height: 1.5; opacity: .95; }
+/* paragraphs read as justified blocks */
+.hx p { text-align: justify; text-justify: inter-word; hyphens: auto; }
+.hx .gauge p { text-align: center; }
+.hx .foot { font-size: 12px; color: var(--muted); line-height: 1.65; border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* world map */
+.hx .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.hx .chip { font: inherit; font-size: 12.5px; font-weight: 600; border: 1.5px solid var(--line); border-radius: 999px; padding: 7px 14px; background: var(--bg); color: var(--muted); cursor: pointer; }
+.hx .chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+.hx .chip:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.hx .worldgrid { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.hx .mapbox path.c { stroke: #ffffff; stroke-width: .6; cursor: pointer; transition: opacity .2s; }
+.hx .mapbox path.c:hover { stroke: var(--navy); stroke-width: 1.4; }
+.hx .mapbox path.c.sel { stroke: var(--navy); stroke-width: 2.2; }
+.hx .scale { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; }
+.hx .scale .ramp { width: 160px; height: 10px; border-radius: 6px; }
+.hx .ccard { border-radius: 22px; background: var(--soft); padding: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.hx .ccard label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.hx .ccard select { max-width: 100%; }
+.hx .ccard .name { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: -.02em; }
+.hx .ccard .rows2 { display: flex; flex-direction: column; gap: 10px; }
+.hx .ccard .m { background: var(--bg); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.hx .ccard .m .k { font-size: 12px; color: var(--muted); font-weight: 600; }
+.hx .ccard .m .v { font-size: 22px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+.hx .ccard .m .v small { font-size: 12px; color: var(--muted); font-weight: 500; margin-left: 4px; }
+.hx .ccard .m .bar { height: 8px; border-radius: 999px; background: #e9edf2; overflow: hidden; display: flex; }
+.hx .ccard .m .bar i { display: block; height: 100%; }
+.hx .ccard .m .none { font-size: 12.5px; color: var(--muted); }
+.hx .ccard .hint { font-size: 12px; color: var(--muted); line-height: 1.5; }
+@media (max-width: 900px) { .hx .worldgrid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1100px) { .hx .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .hx .row { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) {
+  .hx { grid-template-columns: minmax(0, 1fr); }
+  .hx .side { position: static; max-height: none; flex-direction: row; overflow-x: auto; gap: 14px; padding: 12px; border-radius: 18px; }
+  .hx .navgroup { flex-direction: row; align-items: center; }
+  .hx .navgroup > span, .hx .side .sidefoot { display: none; }
+  .hx .navgroup a { white-space: nowrap; }
+  .hx .funnel, .hx .row.even { grid-template-columns: minmax(0, 1fr); }
+  .hx .gl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) { .hx .kpis { grid-template-columns: minmax(0, 1fr); } .hx .band { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .hx .band > div:first-child { grid-column: 1 / -1; } }
+</style>
+
+<div class="hx">
+  <aside class="side" aria-label="Sections">
+    <div class="logo"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="9" cy="14" r="6" fill="#00a99d"/><circle cx="19" cy="14" r="6" fill="#ffc20e" fill-opacity=".9"/><circle cx="14" cy="14" r="2.4" fill="#14204a"/></svg>H₂ Market</div>
+    <div class="navgroup"><span>Main menu</span><a href="#overview" data-nav="overview"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/></svg>Overview</a><a href="#world" data-nav="world"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c2 2 2 10 0 12M8 2c-2 2-2 10 0 12"/></svg>World map</a></div>
+    <div class="navgroup"><span>Market</span><a href="#trend" data-nav="trend"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 13l4-5 3 3 5-7"/></svg>Demand &amp; supply</a><a href="#race" data-nav="race"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 1L3 9h4l-1 6 6-8H8l1-6z"/></svg>Electrolysers</a><a href="#funnel" data-nav="funnel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3h12l-4.5 5.5V13l-3 1V8.5L2 3z"/></svg>2030 projects</a><a href="#regions" data-nav="regions"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 15s5-4.5 5-8.5a5 5 0 10-10 0C3 10.5 8 15 8 15z"/><circle cx="8" cy="6.5" r="1.8"/></svg>Regions</a></div>
+    <div class="navgroup"><span>Economics</span><a href="#cost" data-nav="cost"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M10 5.8C9.5 5.3 8.8 5 8 5c-1.2 0-2 .6-2 1.5S7 8 8 8s2 .6 2 1.5S9.2 11 8 11c-.8 0-1.6-.3-2-.8M8 4v1M8 11v1"/></svg>Cost gap</a><a href="#money" data-nav="money"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 6l6-3.5L14 6M3 6.5v6M6.3 6.5v6M9.7 6.5v6M13 6.5v6M2 13.5h12"/></svg>Investment</a></div>
+    <div class="navgroup"><span>Focus</span><a href="#brazil" data-nav="brazil"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 15V2M3 2.5h9l-2 3 2 3H3"/></svg>Brazil</a><a href="#about" data-nav="about"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 3.5c2-1 4-1 5.5.5 1.5-1.5 3.5-1.5 5.5-.5v9c-2-1-4-1-5.5.5-1.5-1.5-3.5-1.5-5.5-.5v-9zM8 4v9"/></svg>About the data</a></div>
+    <p class="sidefoot">Built by Kenny Garcia Angarita from the IEA Global Hydrogen Review 2026.</p>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <label class="search" for="country-search"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><input id="country-search" type="search" placeholder="Search a country, e.g. Brazil" aria-label="Search a country on the map" autocomplete="off"><kbd>Enter</kbd></label>
+      <span class="topchip"><i></i>IEA data · 2025</span>
+      <a class="user" href="https://www.linkedin.com/in/kennyyusimygarciaangarita/" target="_blank" rel="noopener"><img src="/_blob/3c13140c1875dee6d016c3a0d630744c" alt=""><span><b>Kenny Garcia Angarita</b><small>Data Analyst · LinkedIn</small></span></a>
+    </div>
+    <div class="crumbs" aria-label="Breadcrumb"><b>Workspace</b>›<b>Energy markets</b>›<b>Global Hydrogen Market 2026</b></div>
+    <div class="titlerow" id="overview">
+      <h1>Global Hydrogen Market 2026</h1>
+      <a class="btn" href="https://www.iea.org/reports/global-hydrogen-review-2026" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 2h5v5M14 2L7 9M12 9.5V14H2V4h4.5"/></svg>Open IEA report</a>
+    </div>
+    <p class="lede" id="takeaway">The world used <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=demand_2025">—</b> Mt of hydrogen in 2025, and only <b data-draw="gaugeval" data-source="gauges" data-field="pct" data-where="id=low_em">—</b>% of it was made with low emissions. Electrolysis capacity more than doubled, but factories can already build <b data-draw="overcap" data-source="overcapacity">—</b> times what projects are expected to install each year.</p>
+
+    <section class="kpis" id="headline">
+      <div class="kpi"><div class="kh"><i style="background: var(--yellow)"></i>Hydrogen demand</div><div class="kv"><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=demand_2025">—</span><small>Mt</small></div><div class="ticks" data-draw="ticks" data-source="kpi_strips" data-strip="demand" data-color="var(--yellow)"></div><span class="kc">Strip: 2025 against the IEA 2030 estimate</span></div>
+      <div class="kpi"><div class="kh"><i style="background: var(--teal)"></i>Low-emissions production</div><div class="kv"><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=low_em_2025">—</span><small>Mt</small></div><div class="ticks" data-draw="ticks" data-source="kpi_strips" data-strip="low_em" data-color="var(--teal)"></div><span class="kc">Strip: share of all hydrogen produced</span></div>
+      <div class="kpi"><div class="kh"><i style="background: var(--lime)"></i>Installed electrolysis</div><div class="kv"><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=electrolysis_2025">—</span><small>GW</small></div><div class="ticks" data-draw="ticks" data-source="kpi_strips" data-strip="electrolysis" data-color="var(--lime)"></div><span class="kc">Strip: 2025 against capacity expected in 2026</span></div>
+      <div class="kpi"><div class="kh"><i style="background: var(--coral)"></i>Announced for 2030</div><div class="kv"><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=pipeline_2030">—</span><small>Mt</small></div><div class="ticks" data-draw="ticks" data-source="kpi_strips" data-strip="committed" data-color="var(--coral)"></div><span class="kc">Strip: share already committed</span></div>
+    </section>
+
+    <div class="row" id="trend">
+      <section class="card">
+        <div class="chead">
+          <div><h2>Demand and supply, year by year</h2><p>Switch between who uses hydrogen and how it is produced. Point at the chart to read any year.</p></div>
+          <div class="seg" role="group" aria-label="Series shown">
+            <button type="button" data-trend="demand" aria-pressed="true">Demand</button>
+            <button type="button" data-trend="supply" aria-pressed="false">Production</button>
+          </div>
+        </div>
+        <div class="chart" data-draw="trendarea" data-source="demand_by_sector production_by_route"></div>
+        <div class="legend" id="legend-demand"><span style="color: var(--sky)"><i></i>Industry</span><span style="color: #9cc0e6"><i></i>Refining</span><span style="color: var(--lime)"><i></i>New uses</span><span>Dashed: IEA estimate for 2030</span></div>
+        <div class="legend" id="legend-supply" hidden><span style="color: var(--gas)"><i></i>Natural gas</span><span style="color: var(--coal)"><i></i>Coal</span><span style="color: var(--oil)"><i></i>Oil</span><span style="color: #b9c0c9"><i></i>By-product</span><span style="color: var(--ccus)"><i></i>Fossil with CCUS</span><span style="color: var(--elec)"><i></i>Electrolysis</span></div>
+      </section>
+      <section class="card" id="growth">
+        <div class="chead"><div><h2>Growth in 2025</h2><p>Change from 2024, from the report's chart values.</p></div></div>
+        <div class="chart" data-draw="arrows" data-source="growth_2025"></div>
+      </section>
+    </div>
+
+    <section class="card" id="gauges">
+      <div class="chead"><div><h2>Market shares at a glance</h2><p>How clean, how concentrated and how committed the market is.</p></div></div>
+      <div class="gl">
+        <div class="gauge"><div class="g chart" data-draw="gauge" data-source="gauges" data-gauge="low_em"></div><p><b>Low-emissions share</b> of production in 2025</p></div>
+        <div class="gauge"><div class="g chart" data-draw="gauge" data-source="gauges" data-gauge="fossil"></div><p><b>Unabated gas and coal</b>, about 1,000 Mt of CO₂</p></div>
+        <div class="gauge"><div class="g chart" data-draw="gauge" data-source="gauges" data-gauge="china_elec"></div><p><b>China's share</b> of installed electrolysis</p></div>
+        <div class="gauge"><div class="g chart" data-draw="gauge" data-source="gauges" data-gauge="committed"></div><p><b>Of the 2030 pipeline</b> running or with a final investment decision</p></div>
+      </div>
+    </section>
+  <section class="sec" id="world">
+    <header>
+      <div><h2>The world map of hydrogen</h2><p>Pick a lens, then point at or click any country. Brazil is selected to start: it has no national production target in the IEA comparison, but it is among the most exposed to imported fertiliser, and its region holds one of the largest renewable pipelines.</p></div>
+      <div class="chips" role="group" aria-label="Map lens">
+        <button type="button" class="chip" data-lens="urea" aria-pressed="true">Urea imports</button>
+        <button type="button" class="chip" data-lens="ammonia" aria-pressed="false">Ammonia imports</button>
+        <button type="button" class="chip" data-lens="methanol" aria-pressed="false">Methanol imports</button>
+        <button type="button" class="chip" data-lens="targets" aria-pressed="false">Progress to 2030 targets</button>
+        <button type="button" class="chip" data-lens="pipeline" aria-pressed="false">2030 project pipeline</button>
+      </div>
+    </header>
+    <div class="worldgrid">
+      <div class="card">
+        <div class="chart mapbox" data-draw="worldmap" data-source="world_shapes import_dependence country_targets pipeline_2030_by_region"></div>
+        <div class="scale" data-lens-note="urea ammonia methanol"><span>Share of demand met by imports:</span><span>0%</span><span class="ramp" style="background: linear-gradient(90deg, #fde4df, #f26b5b, #a3271b)"></span><span>100%</span><span>· grey: not in the IEA comparison</span></div>
+        <div class="scale" data-lens-note="targets" hidden><span>Share of the national 2030 target covered by committed projects:</span><span>0%</span><span class="ramp" style="background: linear-gradient(90deg, #d9f3ef, #00a99d, #00574f)"></span><span>40%+</span><span>· grey: no target in the comparison</span></div>
+        <div class="scale" data-lens-note="pipeline" hidden><span>Bubble size: announced low-emissions production for 2030 by region; ring: electrolysis (green) vs fossil with CCUS (blue)</span></div>
+      </div>
+      <aside class="ccard" id="country-card">
+        <label for="country-pick">Country</label>
+        <select class="dash-select" id="country-pick" data-draw="countrypick" data-source="world_shapes"></select>
+        <div data-draw="countrycard" data-source="import_dependence country_targets pipeline_2030_by_region"></div>
+        <p class="hint">Fertiliser figures are 2024 import shares read from IEA Figure 1.2; target progress is read from Figure 7.3. Countries without data stay grey.</p>
+      </aside>
+    </div>
+    <div class="card">
+      <h3 data-lens-note="urea ammonia methanol">Exposure to imports: share from the Middle East vs share of demand imported</h3>
+      <h3 data-lens-note="targets pipeline" hidden>Progress toward national 2030 targets, committed projects and those with strong potential</h3>
+      <div class="chart" data-draw="companion" data-source="import_dependence country_targets"></div>
+      <p class="note" data-lens-note="urea ammonia methanol">Top right means a country imports almost all it uses, much of it from the Middle East, the region whose exports were cut by the conflict. Click a dot to select the country.</p>
+      <p class="note" data-lens-note="targets pipeline" hidden>Dark bar: running or with a final investment decision. Light bar: adds projects with strong potential. * marks a production target (tonnes); the rest are electrolysis capacity targets (GW). Most countries are far from their targets.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="funnel">
+    <header><div><h2>From announcement to reality</h2><p>Every project announced for 2030 adds up to almost <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=pipeline_2030">—</b> Mt a year of low-emissions hydrogen. Each step down the funnel keeps only the projects that got further.</p></div></header>
+    <div class="funnel">
+      <div class="bands" data-draw="bands" data-source="funnel"></div>
+      <div class="card"><div class="chart" data-draw="funnelchart" data-source="funnel"></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="race">
+    <header>
+      <div><h2>The electrolyser race</h2><p>Installed capacity by region. Press 2026 to see what is already under construction or financed.</p></div>
+      <div class="seg" role="group" aria-label="Year shown">
+        <button type="button" data-year="2025" aria-pressed="true">2025</button>
+        <button type="button" data-year="2026" aria-pressed="false">2026e</button>
+      </div>
+    </header>
+    <div class="grid2">
+      <div class="card"><h3>Installed electrolysis, GW</h3><div class="chart" data-draw="race" data-source="electrolyser_capacity_by_region"></div></div>
+      <div class="card">
+        <h3>Factories vs. demand for electrolysers</h3>
+        <div class="ratio"><span class="x"><span data-draw="overcap" data-source="overcapacity">—</span>×</span><p>Factories can build <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=manufacturing_2025">—</b> GW a year, while projects with a decision or strong potential need about <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=deployment_2030">—</b> GW a year to 2030.</p></div>
+        <div class="chart" data-draw="factories" data-source="manufacturing_capacity key_facts"></div>
+        <div class="legend"><span style="color: var(--coral)"><i></i>China</span><span style="color: var(--sky)"><i></i>Europe</span><span style="color: var(--teal)"><i></i>United States</span><span style="color: var(--yellow)"><i></i>India</span><span style="color: var(--stone)"><i></i>Rest of world</span><span style="color: #d9dde3"><i></i>Idle</span></div>
+      </div>
+    </div>
+  </section>
+
+    <div class="row" id="regions-row">
+  <section class="sec" id="regions" style="min-width: 0">
+    <header><div><h2>Where the 2030 projects are</h2><p>Each bubble is a region, sized by announced low-emissions production for 2030. The ring shows the split between electrolysis and fossil fuels with carbon capture.</p></div></header>
+    <div class="card">
+      <div class="chart" data-draw="bubbles" data-source="pipeline_2030_by_region"></div>
+      <div class="legend"><span style="color: var(--elec)"><i></i>Electrolysis</span><span style="color: var(--ccus)"><i></i>Fossil with CCUS</span></div>
+    </div>
+  </section>
+
+    <section class="card" id="region-table">
+      <div class="chead"><div><h2>Regions ranked</h2><p>Announced low-emissions production for 2030, Mt per year.</p></div></div>
+      <div class="tablewrap">
+        <table data-source="pipeline_2030_by_region" data-row-key="region">
+          <thead><tr><th data-field="region">Region</th><th data-field="electrolysis_mt" class="num">Electrolysis</th><th data-field="fossil_ccus_mt" class="num">With CCUS</th><th data-field="total_mt" class="num">Total</th><th data-source="pipeline_share" data-field="share_pct">Share</th></tr></thead>
+          <tbody data-draw="regiontable" data-source="pipeline_2030_by_region pipeline_share"></tbody>
+        </table>
+      </div>
+    </section>
+    </div>
+    <div class="row even">
+  <section class="sec" id="cost">
+    <header><div><h2>The cost gap</h2><p>Each line spans the cheapest to the most expensive region, today and in 2030 under current policies. Electrolysers cost <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=capex_china">—</b> USD/kW installed in China and <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=capex_row">—</b> USD/kW elsewhere.</p></div></header>
+    <div class="card">
+      <div class="chart" data-draw="costarrows" data-source="production_cost"></div>
+      <div class="legend"><span style="color: #c3c9d2"><i></i>2025 range</span><span style="color: var(--navy)"><i></i>2030 range</span><span>Arrow: change in the middle of the range</span></div>
+      <p class="note">Renewable electrolysis in 2025 runs from over USD 3/kg to beyond USD 10/kg; the 2030 line shows the best sites (northern China below USD 2/kg; the Middle East, India and Chile between 3 and 4).</p>
+    </div>
+  </section>
+
+  <section class="sec" id="money">
+    <header><div><h2>Where the money goes</h2><p>Spending on low-emissions plants reached about <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=investment_2025">—</b> USD billion in 2025, and governments have put <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=public_funding">—</b> USD billion behind new or updated policies in <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=strategies">—</b> countries with a hydrogen strategy.</p></div></header>
+    <div class="card">
+      <div class="chart" data-draw="investarea" data-source="investment"></div>
+      <div class="legend"><span style="color: var(--sky)"><i></i>Europe</span><span style="color: var(--teal)"><i></i>United States</span><span style="color: var(--coral)"><i></i>China</span><span style="color: var(--stone)"><i></i>Other</span><span>2026 counts projects with an investment decision</span></div>
+    </div>
+  </section>
+
+    </div>
+  <section class="brazil" id="brazil">
+    <h2>Brazil in focus</h2>
+    <p>Brazil imports most of its nitrogen fertiliser, so the conflict in the Middle East reached its farms directly. At the same time, Latin America holds one of the largest pipelines of renewable hydrogen projects in the world.</p>
+    <div class="bfacts">
+      <div class="bfact"><b><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=brazil_urea_imports">—</span><small>Mt</small></b><span>Urea imported by Brazil, the world's largest importer</span></div>
+      <div class="bfact"><b><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=brazil_urea_me">—</span><small>%</small></b><span>Of Brazil's urea demand met by imports from the Middle East</span></div>
+      <div class="bfact"><b>$<span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=brazil_nib">—</span><small>bn</small></b><span>Nova Indústria Brasil budget for 2024-26, with <span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=brazil_h2_projects">—</span> renewable hydrogen projects selected</span></div>
+      <div class="bfact"><b>$<span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=pecem_loan">—</span><small>m</small></b><span>World Bank loan for ammonia infrastructure at the Port of Pecém</span></div>
+      <div class="bfact"><b><span data-draw="latam" data-source="pipeline_2030_by_region" data-field="total_mt" data-where="region=Latin America">—</span><small>Mt</small></b><span>Low-emissions production announced in Latin America for 2030</span></div>
+    </div>
+  </section>
+
+  <p class="foot" id="about">Source: IEA (2026), Global Hydrogen Review 2026, licence CC BY 4.0. Chart values were read from the vector graphics of the report's figures (pages in each source) and checked against the totals in its text; small rounding differences remain. Growth figures are computed from those chart values. 2026 figures are IEA estimates from projects under construction or with a final investment decision; 2030 figures are announcements and scenarios.</p>
+  </main>
+</div>
+
+<script>
+(function () {
+  const REG = { 'China': 'var(--coral)', 'Europe': 'var(--sky)', 'United States': 'var(--teal)', 'India': 'var(--yellow)', 'Middle East': 'var(--violet)',
+    'Latin America': 'var(--lime)', 'Australia': '#36c5e0', 'Canada': '#b8d86b', 'Rest of world': 'var(--stone)', 'Other': 'var(--stone)', 'Idle': '#e3e7ec' };
+  const ui = { trend: 'demand', year: 2025 };
+  const motion = () => matchMedia('(prefers-reduced-motion: no-preference)').matches;
+  const ok = (id) => { const s = dash.data(id); return s.status === 'ok' ? s.data : null; };
+  const f1 = (x) => new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(x);
+  const ff = (x) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(x);
+  const fv = (x) => new Intl.NumberFormat('en-US', { maximumFractionDigits: x >= 100 ? 0 : x >= 10 ? 1 : 2 }).format(x);
+  const where = (el) => Object.fromEntries((el.dataset.where || '').split('&').filter(Boolean).map((kv) => kv.split('=').map(decodeURIComponent)));
+  const pick = (rows, el) => { const w = where(el); return rows.find((r) => Object.entries(w).every(([k, v]) => String(r[k]) === v)); };
+
+  // ---- calculations shown on the page
+  dash.calc('growth_2025', {
+    title: 'Growth in 2025', description: 'Change from 2024 to 2025 in demand, low-emissions production, installed electrolysis and investment, from the chart values.',
+    inputs: ['demand_by_sector', 'production_by_route', 'electrolyser_capacity', 'investment'],
+    fn: (demand_by_sector, production_by_route, electrolyser_capacity, investment) => {
+      const g = (a, b) => 100 * (b / a - 1);
+      const d = (y) => demand_by_sector.find((r) => r.year === y).total_mt;
+      const l = (y) => { const r = production_by_route.find((x) => x.year === y); return r.fossil_ccus_mt + r.electrolysis_mt; };
+      const e = (y) => electrolyser_capacity.find((r) => r.year === y).total_gw;
+      const i = (y) => investment.filter((r) => r.year === y).reduce((t, r) => t + r.ccus_usd_bn + r.electrolysis_usd_bn, 0);
+      return [{ metric: 'Hydrogen demand', pct: g(d(2024), d(2025)) }, { metric: 'Low-emissions production', pct: g(l(2024), l(2025)) },
+              { metric: 'Investment', pct: g(i(2024), i(2025)) }, { metric: 'Installed electrolysis', pct: g(e(2024), e(2025)) }];
+    }
+  });
+  dash.calc('gauges', {
+    title: 'Shares shown as gauges', description: 'Low-emissions and unabated fossil shares of 2025 production, China share of installed electrolysis, committed share of the 2030 pipeline.',
+    inputs: ['production_by_route', 'electrolyser_capacity_by_region', 'pipeline_2030_by_status'],
+    fn: (production_by_route, electrolyser_capacity_by_region, pipeline_2030_by_status) => {
+      const p = production_by_route.find((r) => r.year === 2025);
+      const e = electrolyser_capacity_by_region.filter((r) => r.year === 2025);
+      const tot = pipeline_2030_by_status.reduce((t, r) => t + r.electrolysis_mt + r.fossil_ccus_mt, 0);
+      const com = pipeline_2030_by_status.filter((r) => r.status === 'Operational' || r.status === 'Final investment decision').reduce((t, r) => t + r.electrolysis_mt + r.fossil_ccus_mt, 0);
+      return [{ id: 'low_em', pct: 100 * (p.fossil_ccus_mt + p.electrolysis_mt) / p.total_mt },
+              { id: 'fossil', pct: 100 * (p.natural_gas_mt + p.coal_mt) / p.total_mt },
+              { id: 'china_elec', pct: 100 * e.find((r) => r.region === 'China').gw / e.reduce((t, r) => t + r.gw, 0) },
+              { id: 'committed', pct: 100 * com / tot }];
+    }
+  });
+  dash.calc('funnel', {
+    title: '2030 pipeline funnel', description: 'Announced low-emissions production for 2030, narrowed to projects with strong potential or better, committed projects, and operating projects.',
+    inputs: ['pipeline_2030_by_status'],
+    fn: (pipeline_2030_by_status) => {
+      const keep = (list) => pipeline_2030_by_status.filter((r) => list.includes(r.status));
+      const sum = (rows, k) => rows.reduce((t, r) => t + r[k], 0);
+      const stages = [['Announced', ['Operational', 'Final investment decision', 'Strong potential', 'Moderate potential', 'Low potential', 'Uncertain']],
+        ['Likely by 2030', ['Operational', 'Final investment decision', 'Strong potential']], ['Committed', ['Operational', 'Final investment decision']], ['Operating', ['Operational']]];
+      return stages.map(([stage, list]) => { const r = keep(list); return { stage, electrolysis_mt: sum(r, 'electrolysis_mt'), fossil_ccus_mt: sum(r, 'fossil_ccus_mt'), total_mt: sum(r, 'electrolysis_mt') + sum(r, 'fossil_ccus_mt') }; });
+    }
+  });
+  dash.calc('overcapacity', {
+    title: 'Factory capacity vs expected installations', description: 'Electrolyser manufacturing capacity in 2025 divided by expected yearly installations to 2030.',
+    inputs: ['key_facts'],
+    fn: (key_facts) => key_facts.find((x) => x.id === 'manufacturing_2025').value / key_facts.find((x) => x.id === 'deployment_2030').value
+  });
+
+  // ---- controls: listen, set aria-pressed / hidden, redraw
+  document.querySelectorAll('.hx [data-trend]').forEach((b) => b.addEventListener('click', () => {
+    ui.trend = b.dataset.trend;
+    document.querySelectorAll('.hx [data-trend]').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    document.querySelectorAll('#legend-demand').forEach((x) => { x.hidden = ui.trend !== 'demand'; });
+    document.querySelectorAll('#legend-supply').forEach((x) => { x.hidden = ui.trend !== 'supply'; });
+    dash.draw('trendarea');
+  }));
+  document.querySelectorAll('.hx [data-year]').forEach((b) => b.addEventListener('click', () => {
+    ui.year = +b.dataset.year;
+    document.querySelectorAll('.hx [data-year]').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    dash.draw('race');
+  }));
+
+  // ---- small helpers
+  const played = new Set();
+  const firstTime = (name) => { if (played.has(name) || !motion()) return false; played.add(name); return true; };
+  function frame(el, H) {
+    el.replaceChildren();
+    const W = Math.max(280, el.clientWidth);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    const pill = d3.select(el).append('div').attr('class', 'pill');
+    return { W, svg, pill };
+  }
+  function showPill(pill, el, ev, title, lines) {
+    pill.selectAll('*').remove();
+    pill.append('div').attr('class', 't').text(title);
+    lines.forEach(([n, c, v]) => { const r = pill.append('div').attr('class', 'r'); if (c) r.append('i').style('background', c); r.append('span').text(n); r.append('b').text(v); });
+    const node = pill.node(); node.style.display = 'block';
+    const b = el.getBoundingClientRect(), t = node.getBoundingClientRect();
+    let x = ev.clientX - b.left + 14, y = ev.clientY - b.top - t.height - 10;
+    if (x + t.width > b.width) x = ev.clientX - b.left - t.width - 14;
+    if (y < 0) y = ev.clientY - b.top + 14;
+    node.style.left = Math.max(0, x) + 'px'; node.style.top = y + 'px';
+  }
+  const hidePill = (pill) => { pill.node().style.display = 'none'; };
+  const reset = (el) => { el.replaceChildren(); };
+
+  // ---- numbers in text
+  dash.draw('fact', (el) => { const rows = ok('key_facts'); const r = rows && pick(rows, el); el.textContent = r ? ff(r.value) : '—'; });
+  dash.draw('gaugeval', (el) => { const rows = ok('gauges'); const r = rows && pick(rows, el); el.textContent = r ? f1(r.pct) : '—'; });
+  dash.draw('overcap', (el) => { const v = ok('overcapacity'); el.textContent = v == null ? '—' : f1(v); });
+  dash.draw('latam', (el) => { const rows = ok('pipeline_2030_by_region'); const r = rows && pick(rows, el); el.textContent = r ? f1(r.total_mt) : '—'; });
+
+  // ---- curved growth arrows
+  dash.draw('arrows', (el) => {
+    const rows = ok('growth_2025'); if (!rows) return reset(el);
+    const W = Math.max(280, el.clientWidth), H = Math.min(420, Math.max(300, W * 0.78));
+    const { svg } = frame(el, H);
+    svg.attr('aria-label', 'Growth in 2025: ' + rows.map((r) => `${r.metric} ${Math.round(r.pct)}%`).join(', '));
+    const colors = ['var(--yellow)', 'var(--teal)', 'var(--sky)', 'var(--lime)'];
+    const n = rows.length, cx0 = W * (W < 520 ? 0.3 : 0.36), base = H - 26, gap = Math.min(30, W / 16);
+    const r0 = Math.min(W * 0.1, 46);
+    const cx = Math.max(cx0, Math.min(W * 0.1, 46) + (rows.length - 1) * gap + Math.min(24, W / 22) + 4);
+    const hScale = d3.scaleSqrt([0, d3.max(rows, (r) => r.pct)], [26, base - 70]);
+    const strokeW = Math.min(24, W / 22);
+    const geo = rows.map((r, i) => { const rad = r0 + i * gap; return { r, i, rad, top: base - r0 - hScale(r.pct), xL: cx - rad, xR: cx + rad, yc: base - rad }; });
+    const labX = cx + r0 + (n - 1) * gap + strokeW + 14;
+    // label rows: start at each arrow's top, then push apart so none overlap
+    const ys = geo.map((q) => q.top + 4).sort((a, b) => a - b);
+    for (let k = 1; k < ys.length; k++) ys[k] = Math.max(ys[k], ys[k - 1] + 62);
+    const order = geo.slice().sort((a, b) => a.top - b.top);
+    order.forEach((q, k) => { q.ly = ys[k]; });
+    geo.forEach((q) => svg.append('path').attr('d', `M${q.xR},${q.top - 2} L${q.xR},${q.top - 10} L${labX - 6},${q.top - 10} L${labX - 6},${q.ly - 4}`).attr('fill', 'none').style('stroke', colors[q.i]).attr('stroke-width', 1.2).attr('opacity', 0.7));
+    geo.forEach((q) => {
+      const c = colors[q.i];
+      const d = `M${q.xL},${q.yc - 4} A${q.rad},${q.rad} 0 0 0 ${q.xR},${q.yc} L${q.xR},${q.top + 10}`;
+      const p = svg.append('path').attr('d', d).attr('fill', 'none').style('stroke', c).attr('stroke-width', strokeW);
+      const head = svg.append('path').attr('d', `M${q.xR - strokeW * 0.85},${q.top + 12} L${q.xR},${q.top - strokeW * 0.6} L${q.xR + strokeW * 0.85},${q.top + 12} Z`).style('fill', c);
+      svg.append('circle').attr('cx', q.xL).attr('cy', q.yc - 4).attr('r', strokeW * 0.62).style('fill', c).attr('stroke', '#fff').attr('stroke-width', 3);
+      const g = svg.append('g');
+      g.append('text').attr('class', 'big').attr('x', labX).attr('y', q.ly).style('fill', c).style('font-size', Math.min(26, W / 16) + 'px').text('+' + Math.round(q.r.pct) + '%');
+      const SHORT = { 'Hydrogen demand': 'Demand', 'Low-emissions production': 'Low-emissions', 'Installed electrolysis': 'Electrolysis', 'Investment': 'Investment' };
+      g.append('text').attr('x', labX).attr('y', q.ly + 28).text(W - labX < 150 ? (SHORT[q.r.metric] || q.r.metric) : q.r.metric);
+      if (firstTime('arrows-' + q.i)) {
+        const len = p.node().getTotalLength();
+        p.attr('stroke-dasharray', `${len} ${len}`).attr('stroke-dashoffset', len).transition().delay(q.i * 160).duration(1100).ease(d3.easeCubicOut).attr('stroke-dashoffset', 0);
+        head.attr('opacity', 0).transition().delay(q.i * 160 + 950).duration(250).attr('opacity', 1);
+        g.attr('opacity', 0).transition().delay(q.i * 160 + 950).duration(350).attr('opacity', 1);
+      }
+    });
+  });
+
+  // ---- gauges
+  const GC = { low_em: 'var(--teal)', fossil: 'var(--yellow)', china_elec: 'var(--coral)', committed: 'var(--lime)' };
+  dash.draw('gauge', (el) => {
+    const rows = ok('gauges'); const r = rows && rows.find((x) => x.id === el.dataset.gauge); if (!r) return reset(el);
+    const S = 150, R = 60, w = 14;
+    el.replaceChildren();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${S} ${S}`).attr('role', 'img').attr('aria-label', `${f1(r.pct)} percent`);
+    const g = svg.append('g').attr('transform', `translate(${S / 2},${S / 2})`);
+    const arc = d3.arc().innerRadius(R - w).outerRadius(R).cornerRadius(w / 2).startAngle(0);
+    g.append('path').attr('d', arc({ endAngle: 2 * Math.PI })).style('fill', '#e9edf2');
+    const fg = g.append('path').style('fill', GC[r.id]);
+    const end = 2 * Math.PI * Math.max(0.012, r.pct / 100);
+    const t = g.append('text').attr('text-anchor', 'middle').attr('dy', '.35em').style('font-size', '26px').style('font-weight', 700).style('fill', 'var(--navy)');
+    const label = (v) => (r.pct < 10 ? f1(v) : Math.round(v)) + '%';
+    if (firstTime('gauge-' + r.id)) {
+      fg.transition().duration(1200).ease(d3.easeCubicOut).attrTween('d', () => (k) => arc({ endAngle: end * k }));
+      t.transition().duration(1200).ease(d3.easeCubicOut).tween('text', function () { return (k) => { this.textContent = label(r.pct * k); }; });
+    } else { fg.attr('d', arc({ endAngle: end })); t.text(label(r.pct)); }
+  });
+
+  // ---- smooth stacked areas with a hover pill
+  function areaChart(el, rows, keys, opts) {
+    const H = opts.H || 300;
+    const { W, svg, pill } = frame(el, H);
+    svg.attr('aria-label', opts.aria);
+    const l = 40, r = 16, t = 16, b = 28;
+    const xp = d3.scalePoint(rows.map((d) => d.year), [l + 6, W - r - 6]); const x = (yv) => xp(yv);
+    const stack = d3.stack().keys(keys.map((k) => k.key))(rows);
+    const y = d3.scaleLinear([0, d3.max(stack[stack.length - 1], (d) => d[1]) * 1.12], [H - b, t]).nice();
+    y.ticks(4).forEach((v) => { svg.append('line').attr('x1', l).attr('x2', W - r).attr('y1', y(v)).attr('y2', y(v)).attr('stroke', v === 0 ? '#cfd5dc' : '#eef1f4'); svg.append('text').attr('x', l - 8).attr('y', y(v)).attr('dy', '.35em').attr('text-anchor', 'end').text(v); });
+    rows.forEach((d) => svg.append('text').attr('x', x(d.year)).attr('y', H - 8).attr('text-anchor', 'middle').text(d.estimate ? d.year + 'e' : d.year));
+    const defs = svg.append('defs');
+    const curve = d3.curveMonotoneX;
+    const real = rows.filter((d) => !d.estimate), est = rows.filter((d, i) => d.estimate || (rows[i + 1] && rows[i + 1].estimate));
+    stack.forEach((s, i) => {
+      const id = `grad-${opts.id}-${i}`;
+      const gr = defs.append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+      gr.append('stop').attr('offset', '0%').style('stop-color', keys[i].color).style('stop-opacity', 0.85);
+      gr.append('stop').attr('offset', '100%').style('stop-color', keys[i].color).style('stop-opacity', 0.45);
+      const pts = s.map((p, j) => ({ year: rows[j].year, y0: p[0], y1: p[1], est: rows[j].estimate }));
+      const realPts = pts.filter((p) => !p.est), estPts = pts.filter((p, j) => p.est || (pts[j + 1] && pts[j + 1].est));
+      const area = d3.area().curve(curve).x((p) => x(p.year)).y0((p) => y(p.y0)).y1((p) => y(p.y1));
+      const path = svg.append('path').attr('d', area(realPts)).style('fill', `url(#${id})`);
+      if (estPts.length > 1) svg.append('path').attr('d', area(estPts)).style('fill', keys[i].color).attr('fill-opacity', 0.18);
+      svg.append('path').attr('d', d3.line().curve(curve).x((p) => x(p.year)).y((p) => y(p.y1))(realPts)).attr('fill', 'none').style('stroke', keys[i].color).attr('stroke-width', 2);
+      if (estPts.length > 1) svg.append('path').attr('d', d3.line().x((p) => x(p.year)).y((p) => y(p.y1))(estPts)).attr('fill', 'none').style('stroke', keys[i].color).attr('stroke-width', 2).attr('stroke-dasharray', '5 4');
+      if (firstTime(`${opts.id}-${opts.variant}-${i}`)) path.attr('opacity', 0).transition().delay(i * 120).duration(700).attr('opacity', 1);
+    });
+    void real; void est;
+    const guide = svg.append('line').attr('y1', t).attr('y2', H - b).attr('stroke', 'var(--navy)').attr('stroke-dasharray', '3 3').style('display', 'none');
+    const dot = svg.append('circle').attr('r', 5).style('fill', '#fff').style('stroke', 'var(--navy)').attr('stroke-width', 2.5).style('display', 'none');
+    svg.append('rect').attr('x', l).attr('y', t).attr('width', W - l - r).attr('height', H - t - b).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev);
+        const d = rows[d3.minIndex(rows, (q) => Math.abs(x(q.year) - mx))];
+        const total = d3.sum(keys, (k) => d[k.key]);
+        guide.attr('x1', x(d.year)).attr('x2', x(d.year)).style('display', null);
+        dot.attr('cx', x(d.year)).attr('cy', y(total)).style('display', null);
+        showPill(pill, el, ev, `${d.estimate ? d.year + ' (estimate)' : d.year} · ${fv(total)} ${opts.unit}`, keys.slice().reverse().map((k) => [k.name, k.color, fv(d[k.key]) + ' ' + opts.unit]));
+      })
+      .on('pointerleave', () => { guide.style('display', 'none'); dot.style('display', 'none'); hidePill(pill); });
+  }
+  dash.draw('trendarea', (el) => {
+    if (ui.trend === 'demand') {
+      const rows = ok('demand_by_sector'); if (!rows) return reset(el);
+      areaChart(el, rows, [{ key: 'industry_mt', name: 'Industry', color: 'var(--sky)' }, { key: 'refining_mt', name: 'Refining', color: '#9cc0e6' }, { key: 'new_uses_mt', name: 'New uses', color: 'var(--lime)' }],
+        { id: 'trend', variant: 'demand', unit: 'Mt', aria: 'Hydrogen demand by sector, 2020 to 2030' });
+    } else {
+      const rows = ok('production_by_route'); if (!rows) return reset(el);
+      areaChart(el, rows, [{ key: 'natural_gas_mt', name: 'Natural gas', color: 'var(--gas)' }, { key: 'coal_mt', name: 'Coal', color: 'var(--coal)' }, { key: 'oil_mt', name: 'Oil', color: 'var(--oil)' },
+        { key: 'by_product_mt', name: 'By-product', color: '#b9c0c9' }, { key: 'fossil_ccus_mt', name: 'Fossil with CCUS', color: 'var(--ccus)' }, { key: 'electrolysis_mt', name: 'Electrolysis', color: 'var(--elec)' }],
+        { id: 'trend', variant: 'supply', unit: 'Mt', aria: 'Hydrogen production by route, 2021 to 2025' });
+    }
+  });
+  dash.draw('investarea', (el) => {
+    const rows = ok('investment'); if (!rows) return reset(el);
+    const regions = ['Europe', 'United States', 'China', 'Other'];
+    const years = [...new Set(rows.map((r) => r.year))];
+    const wide = years.map((y) => { const o = { year: y, estimate: y === 2026 }; regions.forEach((k) => { const r = rows.find((q) => q.year === y && q.region === k) || {}; o[k] = (r.ccus_usd_bn || 0) + (r.electrolysis_usd_bn || 0); }); return o; });
+    areaChart(el, wide, regions.map((k) => ({ key: k, name: k, color: REG[k] })), { id: 'invest', variant: 'all', unit: 'USD bn', H: 280, aria: 'Investment in low-emissions hydrogen production by region, 2022 to 2026' });
+  });
+
+  // ---- funnel
+  const FC = ['var(--coral)', 'var(--sky)', 'var(--teal)', 'var(--navy)'];
+  dash.draw('bands', (el) => {
+    const rows = ok('funnel'); el.replaceChildren(); if (!rows) return;
+    rows.forEach((r, i) => {
+      const band = document.createElement('div'); band.className = 'band'; band.style.background = FC[i];
+      const cell = (k, v, unit) => { const d = document.createElement('div'); const s = document.createElement('span'); s.className = 'k'; s.textContent = k; const b = document.createElement('b'); b.textContent = v; const u = document.createElement('small'); u.textContent = unit; b.appendChild(u); d.append(s, b); return d; };
+      band.append(cell(r.stage, f1(r.total_mt), 'Mt'), cell('Electrolysis', f1(r.electrolysis_mt), 'Mt'), cell('With CCUS', f1(r.fossil_ccus_mt), 'Mt'));
+      el.appendChild(band);
+    });
+  });
+  dash.draw('funnelchart', (el) => {
+    const rows = ok('funnel'); if (!rows) return reset(el);
+    const W = Math.max(260, el.clientWidth), H = 300;
+    const { svg, pill } = frame(el, H);
+    svg.attr('aria-label', 'Funnel of the 2030 pipeline: ' + rows.map((r) => `${r.stage} ${f1(r.total_mt)} Mt`).join(', '));
+    const max = rows[0].total_mt, bandH = (H - 20) / rows.length, cx = W / 2, maxW = W - 30;
+    const wOf = (v) => Math.max(150, maxW * Math.sqrt(v / max));
+    rows.forEach((r, i) => {
+      const w0 = wOf(r.total_mt), w1 = i < rows.length - 1 ? wOf(rows[i + 1].total_mt) : w0 * 0.7;
+      const y0 = 10 + i * bandH, y1 = y0 + bandH - 4;
+      const p = svg.append('path').attr('d', `M${cx - w0 / 2},${y0} L${cx + w0 / 2},${y0} L${cx + w1 / 2},${y1} L${cx - w1 / 2},${y1} Z`).style('fill', FC[i]);
+      svg.append('ellipse').attr('cx', cx).attr('cy', y0).attr('rx', w0 / 2).attr('ry', 7).style('fill', FC[i]).attr('opacity', 0.6);
+      svg.append('text').attr('x', cx).attr('y', (y0 + y1) / 2 + 2).attr('text-anchor', 'middle').attr('dy', '.35em').style('fill', '#fff').style('font-weight', 700).style('font-size', '12px').style('letter-spacing', '.04em')
+        .text(`${r.stage.toUpperCase()} · ${Math.round(100 * r.total_mt / max)}%`);
+      p.on('pointermove', (ev) => showPill(pill, el, ev, r.stage, [['Electrolysis', 'var(--elec)', f1(r.electrolysis_mt) + ' Mt'], ['Fossil with CCUS', 'var(--ccus)', f1(r.fossil_ccus_mt) + ' Mt'], ['Share of announced', null, Math.round(100 * r.total_mt / max) + '%']]))
+        .on('pointerleave', () => hidePill(pill));
+      if (firstTime('funnel-' + i)) p.attr('opacity', 0).attr('transform', `translate(0,-12)`).transition().delay(i * 180).duration(500).attr('opacity', 1).attr('transform', null);
+    });
+  });
+
+  // ---- electrolyser race
+  dash.draw('race', (el) => {
+    const rows = ok('electrolyser_capacity_by_region'); if (!rows) return reset(el);
+    const s = rows.filter((r) => r.year === ui.year).sort((a, b) => b.gw - a.gw);
+    const max = d3.max(rows, (r) => r.gw);
+    const rh = 52, H = s.length * rh + 6;
+    const { W, svg, pill } = frame(el, H);
+    svg.attr('aria-label', `Installed electrolysis by region in ${ui.year}`);
+    const probe = svg.append('text').attr('class', 'lab').text('United States'); const lw = probe.node().getComputedTextLength() + 14; probe.remove();
+    const x = d3.scaleLinear([0, max], [lw, W - 70]);
+    s.forEach((r, i) => {
+      const y0 = i * rh + 8;
+      svg.append('text').attr('class', 'lab').attr('x', 0).attr('y', y0 + 16).attr('dy', '.35em').text(r.region);
+      svg.append('rect').attr('x', lw).attr('y', y0 + 4).attr('width', x(max) - lw).attr('height', 24).attr('rx', 12).style('fill', '#f0f2f5');
+      const bar = svg.append('rect').attr('x', lw).attr('y', y0 + 4).attr('height', 24).attr('rx', 12).style('fill', REG[r.region]).attr('width', 24);
+      const label = svg.append('text').attr('class', 'big').attr('y', y0 + 16).attr('dy', '.35em').style('font-size', '15px').text(f1(r.gw) + ' GW');
+      const wEnd = Math.max(24, x(r.gw) - lw);
+      if (motion()) { bar.transition().duration(800).ease(d3.easeCubicOut).attr('width', wEnd); label.attr('x', lw + 30).transition().duration(800).ease(d3.easeCubicOut).attr('x', lw + wEnd + 8); }
+      else { bar.attr('width', wEnd); label.attr('x', lw + wEnd + 8); }
+      bar.on('pointermove', (ev) => showPill(pill, el, ev, `${r.region} · ${r.year === 2026 ? '2026 estimate' : r.year}`, [['Installed', REG[r.region], f1(r.gw) + ' GW']])).on('pointerleave', () => hidePill(pill));
+    });
+  });
+
+  // ---- factories: stacked columns with the expected-installations line
+  dash.draw('factories', (el) => {
+    const rows = ok('manufacturing_capacity'), facts = ok('key_facts'); if (!rows || !facts) return reset(el);
+    const order = ['China', 'Europe', 'United States', 'India', 'Rest of world', 'Idle'];
+    const years = [...new Set(rows.map((r) => r.year))];
+    const H = 220; const { W, svg, pill } = frame(el, H);
+    svg.attr('aria-label', 'Electrolyser manufacturing capacity by region, 2022 to 2026, against expected installations');
+    const dep = facts.find((f) => f.id === 'deployment_2030').value;
+    const tot = (y) => d3.sum(rows.filter((r) => r.year === y), (r) => r.gw_per_year);
+    const y = d3.scaleLinear([0, d3.max(years, tot) * 1.1], [H - 24, 8]).nice();
+    const x = d3.scaleBand(years, [34, W - 6]).padding(0.32);
+    y.ticks(4).forEach((v) => { svg.append('line').attr('x1', 34).attr('x2', W - 6).attr('y1', y(v)).attr('y2', y(v)).attr('stroke', '#eef1f4'); svg.append('text').attr('x', 28).attr('y', y(v)).attr('dy', '.35em').attr('text-anchor', 'end').text(v); });
+    years.forEach((yr, j) => {
+      let acc = 0;
+      order.forEach((k) => {
+        const v = (rows.find((r) => r.year === yr && r.region === k) || {}).gw_per_year || 0; if (!v) return;
+        const rect = svg.append('rect').attr('x', x(yr)).attr('width', x.bandwidth()).attr('y', y(acc + v)).attr('height', y(acc) - y(acc + v)).style('fill', REG[k]).attr('fill-opacity', yr === 2026 ? 0.6 : 1);
+        if (firstTime(`fac-${yr}-${k}`)) rect.attr('y', y(0)).attr('height', 0).transition().delay(j * 90).duration(600).attr('y', y(acc + v)).attr('height', y(acc) - y(acc + v));
+        acc += v;
+      });
+      svg.append('text').attr('x', x(yr) + x.bandwidth() / 2).attr('y', H - 7).attr('text-anchor', 'middle').text(yr === 2026 ? '2026e' : yr);
+      svg.append('rect').attr('x', x(yr)).attr('width', x.bandwidth()).attr('y', 0).attr('height', H - 24).attr('fill', 'transparent')
+        .on('pointermove', (ev) => showPill(pill, el, ev, `${yr === 2026 ? '2026 estimate' : yr} · ${f1(tot(yr))} GW/yr`, order.slice().reverse().map((k) => [k, REG[k], f1((rows.find((r) => r.year === yr && r.region === k) || {}).gw_per_year || 0)])))
+        .on('pointerleave', () => hidePill(pill));
+    });
+    svg.append('line').attr('x1', 34).attr('x2', W - 6).attr('y1', y(dep)).attr('y2', y(dep)).attr('stroke', 'var(--navy)').attr('stroke-width', 2).attr('stroke-dasharray', '6 4');
+    svg.append('text').attr('class', 'lab').attr('x', 40).attr('y', y(dep) - 7).style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', '4px').text(`~${dep} GW/yr needed`);
+  });
+
+  // ---- bubbles
+  dash.draw('bubbles', (el) => {
+    const rows = ok('pipeline_2030_by_region'); if (!rows) return reset(el);
+    const W = Math.max(280, el.clientWidth), H = Math.max(320, Math.min(420, W * 0.42));
+    const { svg, pill } = frame(el, H);
+    svg.attr('aria-label', 'Announced 2030 low-emissions production by region: ' + rows.map((r) => `${r.region} ${f1(r.total_mt)} Mt`).join(', '));
+    const root = d3.pack().size([W, H]).padding(10)(d3.hierarchy({ children: rows }).sum((d) => d.total_mt || 0));
+    root.leaves().forEach((n, i) => {
+      const r = n.data, g = svg.append('g').attr('transform', `translate(${n.x},${n.y})`);
+      const R = n.r, w = Math.max(6, R * 0.16);
+      g.append('circle').attr('r', R - w).style('fill', REG[r.region] || 'var(--stone)').attr('fill-opacity', 0.16);
+      const pie = d3.pie().sort(null)([r.electrolysis_mt, r.fossil_ccus_mt]);
+      const arc = d3.arc().innerRadius(R - w).outerRadius(R);
+      pie.forEach((p, k) => g.append('path').attr('d', arc(p)).style('fill', k === 0 ? 'var(--elec)' : 'var(--ccus)'));
+      g.append('text').attr('class', 'big').attr('text-anchor', 'middle').attr('dy', '-.1em').style('font-size', Math.max(12, Math.min(22, R / 2.6)) + 'px').text(f1(r.total_mt));
+      g.append('text').attr('class', 'lab').attr('text-anchor', 'middle').attr('dy', R > 40 ? '1.5em' : '1.3em').style('font-size', Math.max(9, Math.min(13, R / 4.5)) + 'px').text(R > 40 ? r.region : r.region.split(' ')[0]);
+      g.on('pointermove', (ev) => showPill(pill, el, ev, r.region, [['Electrolysis', 'var(--elec)', f1(r.electrolysis_mt) + ' Mt'], ['Fossil with CCUS', 'var(--ccus)', f1(r.fossil_ccus_mt) + ' Mt'], ['Total', null, f1(r.total_mt) + ' Mt']]))
+        .on('pointerleave', () => hidePill(pill));
+      if (firstTime('bubble-' + i)) g.attr('opacity', 0).transition().delay(i * 70).duration(500).attr('opacity', 1);
+    });
+  });
+
+  // ---- cost ranges with arrows from 2025 to 2030
+  dash.draw('costarrows', (el) => {
+    const rows = ok('production_cost'); if (!rows) return reset(el);
+    const pairs = [['Natural gas', 'Natural gas', 'Natural gas'], ['Natural gas with CCUS', 'Natural gas with CCUS', 'Natural gas with CCUS'], ['Coal', 'Coal', 'Coal'],
+      ['Coal with CCUS', 'Coal with CCUS', 'Coal with CCUS'], ['Renewable electrolysis', 'Renewable electrolysis', 'Renewable electrolysis, best sites']];
+    const rh = 56, H = pairs.length * rh + 34;
+    const { W, svg, pill } = frame(el, H);
+    svg.attr('aria-label', 'Hydrogen production cost ranges in 2025 and 2030 by pathway');
+    const probe = svg.append('text').attr('class', 'lab').text('Renewable electrolysis'); const lw = probe.node().getComputedTextLength() + 16; probe.remove();
+    const x = d3.scaleLinear([0, 12], [lw, W - 16]);
+    x.ticks(6).forEach((t) => { svg.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', 6).attr('y2', H - 26).attr('stroke', '#eef1f4'); svg.append('text').attr('x', x(t)).attr('y', H - 8).attr('text-anchor', 'middle').text('$' + t + '/kg'); });
+    svg.append('defs').append('marker').attr('id', 'cost-head').attr('viewBox', '0 0 10 10').attr('refX', 8).attr('refY', 5).attr('markerWidth', 7).attr('markerHeight', 7).attr('orient', 'auto')
+      .append('path').attr('d', 'M0,0 L10,5 L0,10 Z').style('fill', 'var(--coral)');
+    pairs.forEach(([label, p25, p30], i) => {
+      const a = rows.find((r) => r.pathway === p25 && r.year === 2025), b = rows.find((r) => r.pathway === p30 && r.year === 2030); if (!a || !b) return;
+      const cy = i * rh + 26;
+      svg.append('text').attr('class', 'lab').attr('x', 0).attr('y', cy).attr('dy', '.35em').text(label);
+      svg.append('rect').attr('x', x(a.low_usd_kg)).attr('y', cy - 15).attr('width', x(Math.min(12, a.high_usd_kg)) - x(a.low_usd_kg)).attr('height', 9).attr('rx', 4.5).style('fill', '#c3c9d2');
+      const bar = svg.append('rect').attr('x', x(b.low_usd_kg)).attr('y', cy + 6).attr('height', 9).attr('rx', 4.5).style('fill', 'var(--navy)').attr('width', x(Math.min(12, b.high_usd_kg)) - x(b.low_usd_kg));
+      const m25 = (a.low_usd_kg + Math.min(12, a.high_usd_kg)) / 2, m30 = (b.low_usd_kg + Math.min(12, b.high_usd_kg)) / 2;
+      const arrow = svg.append('path').attr('d', `M${x(m25)},${cy - 6} C${x(m25)},${cy + 2} ${x(m30)},${cy - 4} ${x(m30)},${cy + 4}`).attr('fill', 'none').style('stroke', 'var(--coral)').attr('stroke-width', 2).attr('marker-end', 'url(#cost-head)');
+      svg.append('rect').attr('x', 0).attr('y', cy - 22).attr('width', W).attr('height', rh - 6).attr('fill', 'transparent')
+        .on('pointermove', (ev) => showPill(pill, el, ev, label, [['2025', '#c3c9d2', `$${f1(a.low_usd_kg)} to ${a.high_usd_kg >= 12 ? 'over ' : ''}$${f1(Math.min(12, a.high_usd_kg))}/kg`], ['2030', 'var(--navy)', `$${f1(b.low_usd_kg)} to $${f1(b.high_usd_kg)}/kg`]]))
+        .on('pointerleave', () => hidePill(pill));
+      if (firstTime('cost-' + i)) { bar.attr('opacity', 0).transition().delay(300 + i * 120).duration(500).attr('opacity', 1); arrow.attr('opacity', 0).transition().delay(600 + i * 120).duration(400).attr('opacity', 1); }
+    });
+  });
+
+  // ---- world map, country card and companion chart
+  ui.lens = 'urea'; ui.country = 'Brazil';
+  const EUROPE = new Set(['Netherlands', 'Austria', 'United Kingdom', 'Germany', 'Belgium', 'Portugal', 'France', 'Czechia', 'Romania', 'Hungary', 'Denmark', 'Poland', 'Estonia', 'Lithuania', 'Latvia',
+    'Spain', 'Italy', 'Sweden', 'Norway', 'Finland', 'Ireland', 'Greece', 'Slovakia', 'Slovenia', 'Croatia', 'Bulgaria', 'Switzerland', 'Luxembourg', 'Iceland', 'Serbia', 'Bosnia and Herz.', 'Albania', 'Macedonia', 'Montenegro', 'Kosovo', 'Moldova', 'Ukraine', 'Belarus']);
+  const LATAM = new Set(['Brazil', 'Argentina', 'Chile', 'Colombia', 'Paraguay', 'Uruguay', 'Ecuador', 'Peru', 'Bolivia', 'Venezuela', 'Mexico', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras',
+    'Nicaragua', 'El Salvador', 'Belize', 'Cuba', 'Dominican Rep.', 'Haiti', 'Jamaica', 'Guyana', 'Suriname', 'Trinidad and Tobago', 'Puerto Rico', 'Bahamas', 'Falkland Is.']);
+  const MIDEAST = new Set(['Saudi Arabia', 'United Arab Emirates', 'Oman', 'Qatar', 'Kuwait', 'Iran', 'Iraq', 'Israel', 'Jordan', 'Yemen', 'Syria', 'Lebanon', 'Palestine']);
+  const regionOf = (n) => (EUROPE.has(n) ? 'Europe' : LATAM.has(n) ? 'Latin America' : MIDEAST.has(n) ? 'Middle East' : n === 'United States of America' ? 'United States'
+    : ['China', 'India', 'Australia', 'Canada'].includes(n) ? n : 'Rest of world');
+  const ANCHOR = { 'Europe': 'Germany', 'Latin America': 'Brazil', 'United States': 'United States of America', 'Canada': 'Canada', 'China': 'China', 'India': 'India',
+    'Middle East': 'Saudi Arabia', 'Australia': 'Australia', 'Rest of world': 'Chad' };
+  const display = (n) => ({ 'United States of America': 'United States', 'South Korea': 'Korea', 'Turkey': 'Türkiye', 'Vietnam': 'Viet Nam' }[n] || n);
+  const depColor = d3.scaleLinear([0, 50, 100], ['#fde4df', '#f26b5b', '#a3271b']).clamp(true);
+  const tgtColor = d3.scaleLinear([0, 15, 40], ['#d9f3ef', '#00a99d', '#00574f']).clamp(true);
+  const PRODUCT = { urea: 'Urea', ammonia: 'Ammonia', methanol: 'Methanol' };
+  const select = (name) => { ui.country = name; dash.draw('worldmap'); dash.draw('countrycard'); dash.draw('companion'); dash.draw('countrypick'); };
+
+  document.querySelectorAll('.hx [data-lens]').forEach((b) => b.addEventListener('click', () => {
+    ui.lens = b.dataset.lens;
+    document.querySelectorAll('.hx [data-lens]').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    document.querySelectorAll('.hx [data-lens-note]').forEach((x) => { x.hidden = !x.dataset.lensNote.split(' ').includes(ui.lens); });
+    dash.draw('worldmap'); dash.draw('companion');
+  }));
+
+  dash.draw('countrypick', (sel) => {
+    const shapes = ok('world_shapes'); if (!shapes) { sel.replaceChildren(); return; }
+    const names = shapes.map((s) => s.country).concat(['Singapore']).sort((a, b) => display(a).localeCompare(display(b)));
+    sel.replaceChildren(...names.map((n) => new Option(display(n), n)));
+    sel.value = ui.country;
+    sel.onchange = () => select(sel.value);
+  });
+
+  dash.draw('worldmap', (el) => {
+    const shapes = ok('world_shapes'), dep = ok('import_dependence'), tg = ok('country_targets'), pipe = ok('pipeline_2030_by_region');
+    if (!shapes || !dep || !tg || !pipe) return reset(el);
+    el.replaceChildren();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', '0 0 960 500').attr('role', 'img');
+    const pill = d3.select(el).append('div').attr('class', 'pill');
+    const lens = ui.lens;
+    let valueOf, tipOf;
+    if (PRODUCT[lens]) {
+      const by = new Map(dep.filter((r) => r.product === PRODUCT[lens]).map((r) => [r.map_name, r]));
+      svg.attr('aria-label', `World map of ${lens} import dependence`);
+      valueOf = (n) => { const r = by.get(n); return r ? depColor(r.import_share_pct) : '#e9edf2'; };
+      tipOf = (n) => { const r = by.get(n); return r ? [['Imported', '#f26b5b', Math.round(r.import_share_pct) + '% of demand'], ['From the Middle East', '#a3271b', Math.round(r.middle_east_share_pct) + '% of demand']] : [['Not in the IEA comparison', null, '']]; };
+    } else if (lens === 'targets') {
+      const by = new Map(tg.map((r) => [r.map_name, r]));
+      svg.attr('aria-label', 'World map of progress toward national 2030 hydrogen targets');
+      valueOf = (n) => { const r = by.get(n); return r ? tgtColor(r.committed_pct) : '#e9edf2'; };
+      tipOf = (n) => { const r = by.get(n); return r ? [['Committed', 'var(--teal)', f1(r.committed_pct) + '% of target'], ['With strong potential', '#7fd6cd', f1(r.with_strong_potential_pct) + '%'], ['Target type', null, r.target_type]] : [['No target in the comparison', null, '']]; };
+    } else {
+      svg.attr('aria-label', 'World map of announced 2030 low-emissions hydrogen production by region');
+      valueOf = (n) => '#e9edf2';
+      tipOf = (n) => { const reg = regionOf(n); const r = pipe.find((q) => q.region === reg); return r ? [['Region', null, reg], ['Announced for 2030', null, f1(r.total_mt) + ' Mt']] : []; };
+    }
+    svg.selectAll('path.c').data(shapes).join('path').attr('class', (s) => 'c' + (s.country === ui.country ? ' sel' : '')).attr('d', (s) => s.path).style('fill', (s) => valueOf(s.country))
+      .on('pointermove', (ev, s) => showPill(pill, el, ev, display(s.country), tipOf(s.country)))
+      .on('pointerleave', () => hidePill(pill))
+      .on('click', (ev, s) => select(s.country));
+    svg.selectAll('path.c.sel').raise();
+    if (lens === 'pipeline') {
+      const pos = new Map(shapes.map((s) => [s.country, [s.cx, s.cy]]));
+      const rs = d3.scaleSqrt([0, d3.max(pipe, (r) => r.total_mt)], [0, 46]);
+      pipe.forEach((r, i) => {
+        const at = pos.get(ANCHOR[r.region]); if (!at) return;
+        const g = svg.append('g').attr('transform', `translate(${at[0]},${at[1]})`).style('cursor', 'pointer');
+        const R = Math.max(9, rs(r.total_mt)), w = Math.max(4, R * 0.22);
+        g.append('circle').attr('r', R).style('fill', '#ffffff').attr('fill-opacity', 0.9);
+        d3.pie().sort(null)([r.electrolysis_mt, r.fossil_ccus_mt]).forEach((p, k) => g.append('path').attr('d', d3.arc().innerRadius(R - w).outerRadius(R)(p)).style('fill', k === 0 ? 'var(--elec)' : 'var(--ccus)'));
+        g.append('text').attr('text-anchor', 'middle').attr('dy', '.35em').style('font-size', Math.max(9, Math.min(15, R / 2.4)) + 'px').style('font-weight', 700).style('fill', 'var(--navy)').text(f1(r.total_mt));
+        g.on('pointermove', (ev) => showPill(pill, el, ev, r.region, [['Electrolysis', 'var(--elec)', f1(r.electrolysis_mt) + ' Mt'], ['Fossil with CCUS', 'var(--ccus)', f1(r.fossil_ccus_mt) + ' Mt'], ['Total', null, f1(r.total_mt) + ' Mt']]))
+          .on('pointerleave', () => hidePill(pill)).on('click', () => select(ANCHOR[r.region]));
+        if (firstTime('pipebubble-' + i)) g.attr('opacity', 0).transition().delay(i * 70).duration(450).attr('opacity', 1);
+      });
+    }
+  });
+
+  dash.draw('countrycard', (el) => {
+    const dep = ok('import_dependence'), tg = ok('country_targets'), pipe = ok('pipeline_2030_by_region');
+    el.replaceChildren(); if (!dep || !tg || !pipe) return;
+    const n = ui.country;
+    const add = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+    const wrap = add('div', 'rows2');
+    wrap.appendChild(add('div', 'name', display(n)));
+    const metric = (k, v, unit, bars, sub) => {
+      const m = add('div', 'm'); m.appendChild(add('span', 'k', k));
+      const vv = add('span', 'v', v); if (unit) vv.appendChild(add('small', null, unit)); m.appendChild(vv);
+      if (bars) { const b = add('div', 'bar'); bars.forEach(([w, c]) => { const i = add('i'); i.style.width = Math.max(0, Math.min(100, w)) + '%'; i.style.background = c; b.appendChild(i); }); m.appendChild(b); }
+      if (sub) m.appendChild(add('span', 'none', sub));
+      wrap.appendChild(m);
+    };
+    const rows = dep.filter((r) => r.map_name === n);
+    rows.forEach((r) => metric(`${r.product} imports`, Math.round(r.import_share_pct) + '%', 'of demand',
+      [[r.middle_east_share_pct, '#a3271b'], [r.import_share_pct - r.middle_east_share_pct, '#f6a89c']], `${Math.round(r.middle_east_share_pct)}% of demand comes from the Middle East`));
+    const t = tg.find((r) => r.map_name === n);
+    if (t) metric(`Progress to 2030 ${t.target_type} target`, f1(t.committed_pct) + '%', 'committed',
+      [[t.committed_pct, 'var(--teal)'], [t.with_strong_potential_pct - t.committed_pct, '#9fe0d8']], `${f1(t.with_strong_potential_pct)}% with projects of strong potential`);
+    else metric('National 2030 target', '—', null, null, 'Not in the IEA comparison of national production targets');
+    const reg = regionOf(n), pr = pipe.find((r) => r.region === reg);
+    if (pr) metric(`${reg}: projects announced for 2030`, f1(pr.total_mt), 'Mt', [[100 * pr.electrolysis_mt / pr.total_mt, 'var(--elec)'], [100 * pr.fossil_ccus_mt / pr.total_mt, 'var(--ccus)']],
+      `${Math.round(100 * pr.electrolysis_mt / pr.total_mt)}% electrolysis · regional total, not ${display(n)} alone`);
+    if (!rows.length) wrap.appendChild(add('p', 'hint', `${display(n)} is not in the IEA comparison of fertiliser and methanol imports.`));
+    el.appendChild(wrap);
+  });
+
+  dash.draw('companion', (el) => {
+    const dep = ok('import_dependence'), tg = ok('country_targets'); if (!dep || !tg) return reset(el);
+    if (PRODUCT[ui.lens]) {
+      const rows = dep.filter((r) => r.product === PRODUCT[ui.lens]);
+      const H = 340; const { W, svg, pill } = frame(el, H);
+      svg.attr('aria-label', `${PRODUCT[ui.lens]}: share of demand imported against share from the Middle East, by country`);
+      const l = 44, r = 20, t = 14, b = 40;
+      const x = d3.scaleLinear([0, 100], [l, W - r]), y = d3.scaleLinear([0, 105], [H - b, t]);
+      [0, 25, 50, 75, 100].forEach((v) => {
+        svg.append('line').attr('x1', l).attr('x2', W - r).attr('y1', y(v)).attr('y2', y(v)).attr('stroke', '#eef1f4');
+        svg.append('text').attr('x', l - 8).attr('y', y(v)).attr('dy', '.35em').attr('text-anchor', 'end').text(v + '%');
+        svg.append('line').attr('y1', t).attr('y2', H - b).attr('x1', x(v)).attr('x2', x(v)).attr('stroke', '#eef1f4');
+        svg.append('text').attr('x', x(v)).attr('y', H - b + 16).attr('text-anchor', 'middle').text(v + '%');
+      });
+      svg.append('text').attr('x', (l + W - r) / 2).attr('y', H - 4).attr('text-anchor', 'middle').text('Share of demand imported from the Middle East →');
+      svg.append('text').attr('transform', `translate(12,${(t + H - b) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('Share of demand imported →');
+      svg.append('rect').attr('x', x(50)).attr('y', y(105)).attr('width', x(100) - x(50)).attr('height', y(50) - y(105)).style('fill', '#f26b5b').attr('fill-opacity', 0.06);
+      svg.append('text').attr('x', x(99)).attr('y', y(55)).attr('text-anchor', 'end').style('fill', '#a3271b').style('font-weight', 600).text('Most exposed');
+      // place labels: right of the dot, moved below when they would run into a neighbour's label
+      const placed = [];
+      const labelDy = new Map();
+      rows.slice().sort((a, b) => a.middle_east_share_pct - b.middle_east_share_pct).forEach((d) => {
+        const px = x(d.middle_east_share_pct), py = y(d.import_share_pct), w = display(d.map_name).length * 6.2 + 14;
+        let dy = 0;
+        for (const cand of [0, 16, -16, 30]) { if (!placed.some((q) => Math.abs(q.y - (py + cand)) < 13 && px < q.x + q.w && q.x < px + w)) { dy = cand; break; } }
+        placed.push({ x: px, y: py + dy, w }); labelDy.set(d.map_name, dy);
+      });
+      rows.slice().sort((a, b) => (a.map_name === ui.country) - (b.map_name === ui.country)).forEach((d, i) => {
+        const on = d.map_name === ui.country;
+        const g = svg.append('g').attr('transform', `translate(${x(d.middle_east_share_pct)},${y(d.import_share_pct)})`).style('cursor', 'pointer');
+        g.append('circle').attr('r', on ? 10 : 7).style('fill', on ? 'var(--navy)' : '#f26b5b').attr('fill-opacity', on ? 1 : 0.75).attr('stroke', '#fff').attr('stroke-width', 2);
+        g.append('text').attr('class', on ? 'lab' : null).attr('x', 12).attr('y', labelDy.get(d.map_name) || 0).attr('dy', '.35em').text(display(d.map_name));
+        g.on('pointermove', (ev) => showPill(pill, el, ev, display(d.map_name), [['Imported', '#f26b5b', Math.round(d.import_share_pct) + '% of demand'], ['From the Middle East', '#a3271b', Math.round(d.middle_east_share_pct) + '% of demand']]))
+          .on('pointerleave', () => hidePill(pill)).on('click', () => select(d.map_name));
+        if (firstTime(`dot-${ui.lens}-${i}`)) g.attr('opacity', 0).transition().delay(i * 40).duration(400).attr('opacity', 1);
+      });
+    } else {
+      const rows = tg.slice().sort((a, b) => b.with_strong_potential_pct - a.with_strong_potential_pct || b.committed_pct - a.committed_pct);
+      const rh = 22, H = rows.length * rh + 30; const { W, svg, pill } = frame(el, H);
+      svg.attr('aria-label', 'Progress toward national 2030 hydrogen targets by country');
+      const probe = svg.append('text').attr('class', 'lab').text('United Arab Emirates'); const lw = probe.node().getComputedTextLength() + 12; probe.remove();
+      const top = Math.max(100, d3.max(rows, (d) => d.with_strong_potential_pct));
+      const x = d3.scaleLinear([0, top], [lw, W - 60]);
+      [0, 25, 50, 75, 100].forEach((v) => { svg.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', 0).attr('y2', H - 24).attr('stroke', '#eef1f4'); svg.append('text').attr('x', x(v)).attr('y', H - 8).attr('text-anchor', 'middle').text(v + '% of target'); });
+      rows.forEach((d, i) => {
+        const on = d.map_name === ui.country, y0 = i * rh + 2;
+        const g = svg.append('g').style('cursor', 'pointer');
+        g.append('text').attr('class', 'lab').attr('x', 0).attr('y', y0 + rh / 2).attr('dy', '.35em').style('fill', on ? 'var(--teal)' : null).text(display(d.map_name) + (d.target_type === 'production' ? ' *' : ''));
+        g.append('rect').attr('x', lw).attr('y', y0 + 4).attr('width', x(100) - lw).attr('height', rh - 8).attr('rx', 6).style('fill', '#f2f4f7');
+        g.append('rect').attr('x', lw).attr('y', y0 + 4).attr('width', Math.max(0, x(d.with_strong_potential_pct) - lw)).attr('height', rh - 8).attr('rx', 6).style('fill', '#9fe0d8');
+        g.append('rect').attr('x', lw).attr('y', y0 + 4).attr('width', Math.max(0, x(d.committed_pct) - lw)).attr('height', rh - 8).attr('rx', 6).style('fill', on ? 'var(--navy)' : 'var(--teal)');
+        g.append('text').attr('x', x(Math.max(d.with_strong_potential_pct, 0)) + 6).attr('y', y0 + rh / 2).attr('dy', '.35em').text(f1(d.with_strong_potential_pct) + '%');
+        g.append('rect').attr('x', 0).attr('y', y0).attr('width', W).attr('height', rh).attr('fill', 'transparent')
+          .on('pointermove', (ev) => showPill(pill, el, ev, display(d.map_name), [['Committed', 'var(--teal)', f1(d.committed_pct) + '%'], ['With strong potential', '#9fe0d8', f1(d.with_strong_potential_pct) + '%'], ['Target type', null, d.target_type]]))
+          .on('pointerleave', () => hidePill(pill)).on('click', () => select(d.map_name));
+      });
+    }
+  });
+
+  // ---- app shell: KPI strips, region table, navigation and country search
+  dash.calc('kpi_strips', {
+    title: 'KPI strip fractions', description: 'Demand 2025 vs the 2030 estimate, low-emissions share of production, installed electrolysis 2025 vs 2026 estimate, committed share of the 2030 pipeline.',
+    inputs: ['demand_by_sector', 'production_by_route', 'electrolyser_capacity', 'pipeline_2030_by_status'],
+    fn: (demand_by_sector, production_by_route, electrolyser_capacity, pipeline_2030_by_status) => {
+      const d = (y) => demand_by_sector.find((r) => r.year === y).total_mt;
+      const p = production_by_route.find((r) => r.year === 2025);
+      const e = (y) => electrolyser_capacity.find((r) => r.year === y).total_gw;
+      const tot = pipeline_2030_by_status.reduce((t, r) => t + r.electrolysis_mt + r.fossil_ccus_mt, 0);
+      const com = pipeline_2030_by_status.filter((r) => r.status === 'Operational' || r.status === 'Final investment decision').reduce((t, r) => t + r.electrolysis_mt + r.fossil_ccus_mt, 0);
+      return [{ id: 'demand', fraction: d(2025) / d(2030) }, { id: 'low_em', fraction: (p.fossil_ccus_mt + p.electrolysis_mt) / p.total_mt },
+              { id: 'electrolysis', fraction: e(2025) / e(2026) }, { id: 'committed', fraction: com / tot }];
+    }
+  });
+  dash.calc('pipeline_share', {
+    title: 'Share of the 2030 pipeline by region', description: 'Each region’s announced low-emissions production as a share of the world total.',
+    inputs: ['pipeline_2030_by_region'],
+    fn: (pipeline_2030_by_region) => { const t = pipeline_2030_by_region.reduce((s, r) => s + r.total_mt, 0); return pipeline_2030_by_region.map((r) => ({ region: r.region, share_pct: 100 * r.total_mt / t })); }
+  });
+
+  dash.draw('ticks', (el) => {
+    const rows = ok('kpi_strips'); el.replaceChildren();
+    const r = rows && rows.find((x) => x.id === el.dataset.strip); if (!r) return;
+    const n = 36, on = Math.max(r.fraction > 0 ? 1 : 0, Math.round(r.fraction * n));
+    for (let i = 0; i < n; i++) { const s = document.createElement('span'); if (i < on) s.style.background = el.dataset.color; el.appendChild(s); }
+  });
+
+  dash.draw('regiontable', (el) => {
+    const rows = ok('pipeline_2030_by_region'), sh = ok('pipeline_share'); el.replaceChildren(); if (!rows || !sh) return;
+    rows.slice().sort((a, b) => b.total_mt - a.total_mt).forEach((r, i) => {
+      const tr = document.createElement('tr');
+      const td = (cls) => { const c = document.createElement('td'); if (cls) c.className = cls; tr.appendChild(c); return c; };
+      const c0 = td(); const tag = document.createElement('span'); tag.className = 'tag'; tag.style.background = REG[r.region] || 'var(--stone)'; tag.textContent = String(i + 1).padStart(2, '0'); c0.append(tag, document.createTextNode(r.region));
+      td('num').textContent = f1(r.electrolysis_mt);
+      td('num').textContent = f1(r.fossil_ccus_mt);
+      td('num').textContent = f1(r.total_mt);
+      const s = sh.find((x) => x.region === r.region); const c4 = td(); const bar = document.createElement('span'); bar.className = 'share'; const fill = document.createElement('i'); fill.style.width = (s ? s.share_pct : 0) * 3 + '%'; bar.appendChild(fill);
+      c4.append(bar, document.createTextNode(s ? Math.round(s.share_pct) + '%' : '—'));
+      tr.style.cursor = 'pointer';
+      tr.addEventListener('click', () => { const a = { 'Europe': 'Germany', 'Latin America': 'Brazil', 'United States': 'United States of America', 'Middle East': 'Saudi Arabia', 'Rest of world': 'Chad' }[r.region] || r.region; select(a); });
+      el.appendChild(tr);
+    });
+  });
+
+  // sidebar: highlight the section in view, keep it in the link
+  const links = document.querySelectorAll('.hx [data-nav]');
+  const mark = (id) => links.forEach((a) => a.setAttribute('aria-current', a.dataset.nav === id ? 'true' : 'false'));
+  mark('overview');
+  links.forEach((a) => a.addEventListener('click', (ev) => {
+    const t = document.getElementById(a.dataset.nav); if (!t) return;
+    ev.preventDefault(); t.scrollIntoView({ behavior: motion() ? 'smooth' : 'auto', block: 'start' }); mark(a.dataset.nav); dash.setLink(a.dataset.nav);
+  }));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) mark(e.target.id); }), { root: document, rootMargin: '-35% 0px -60% 0px' });
+    links.forEach((a) => { const t = document.getElementById(a.dataset.nav); if (t) io.observe(t); });
+  }
+  const startAt = document.getElementById(location.hash.slice(1));
+  if (startAt) setTimeout(() => startAt.scrollIntoView(), 400);
+
+  // country search: Enter jumps to the map with that country selected
+  document.querySelectorAll('#country-search').forEach((inp) => inp.addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Enter') return;
+    const shapes = dash.data('world_shapes'); if (shapes.status !== 'ok') return;
+    const q = inp.value.trim().toLowerCase(); if (!q) return;
+    const names = shapes.data.map((s) => s.country).concat(['Singapore']);
+    const hit = names.find((n) => display(n).toLowerCase() === q || n.toLowerCase() === q) || names.find((n) => display(n).toLowerCase().startsWith(q)) || names.find((n) => display(n).toLowerCase().includes(q));
+    if (!hit) { inp.setAttribute('aria-invalid', 'true'); return; }
+    inp.setAttribute('aria-invalid', 'false');
+    select(hit);
+    const w = document.getElementById('world'); if (w) w.scrollIntoView({ behavior: motion() ? 'smooth' : 'auto', block: 'start' });
+    mark('world');
+  }));
+})();
+</script>
