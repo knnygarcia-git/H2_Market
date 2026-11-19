@@ -1,4 +1,4 @@
-// Records the dashboard walkthrough (hook, chapters, spotlighted charts, captions) as a 1080p MP4; run `node preview/server.js` first.
+// Records the dashboard walkthrough (title card, chapters, spotlighted charts, captions) as a 1080p MP4; run `node preview/server.js` first.
 // Usage: node preview/record_demo.js [output.mp4]
 const { chromium } = require('playwright');
 const fs = require('fs');
@@ -8,13 +8,6 @@ const R = JSON.parse(fs.readFileSync(__dirname + '/captions.json', 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const OUT = process.argv[2] || __dirname + '/../docs/demo.mp4';
 
-const HOOK = [
-  'Every year, the world uses <em>102 million tonnes</em> of hydrogen.',
-  'About half becomes ammonia and methanol: the base of <i>fertiliser</i>.',
-  'Less than <em>1%</em> of it is made with low emissions.',
-  'In 2026, the Strait of Hormuz closed and <em>urea prices doubled</em>.',
-  '<span class="small">Who is exposed, what is promised, and where does Brazil fit in?</span>',
-];
 // where the page should sit when each chapter curtain lifts
 const AFTER_CHAPTER = { ch1: ['#headline', 90], ch2: ['#world .worldgrid', 16], ch3: ['#funnel', 16], ch4: ['#cost', 16], ch5: ['#brazil', 16] };
 
@@ -74,15 +67,7 @@ const AFTER_CHAPTER = { ch1: ['#headline', 90], ch2: ['#world .worldgrid', 16], 
   };
 
   const actions = {
-    hook: async (r) => {
-      await ev((lines) => { document.getElementById('hook').innerHTML = lines.map((l) => `<div class="line">${l}</div>`).join(''); }, HOOK);
-      const per = (r.dur * 1000 - 600) / HOOK.length;
-      for (let i = 0; i < HOOK.length; i++) {
-        await ev((i) => { const ls = document.querySelectorAll('#hook .line'); ls.forEach((l, k) => { l.classList.toggle('in', k <= i); l.classList.toggle('dim', k < i); }); }, i);
-        await sleep(per);
-      }
-    },
-    title: async (r) => { await show('card', true); await sleep(700); await show('hook', false); await sleep(r.dur * 1000 - 1500); },
+    title: async (r) => { await sleep(r.dur * 1000 - 800); },
     kpis: async () => { await show('card', false); await show('badge', true); await spot('#headline');
       const k = await page.$$eval('.kpi', (els) => els.map((e) => { const r = e.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }));
       for (const c of k) { await move(c, 28); await sleep(1700); } },

@@ -1,32 +1,32 @@
 [
  {
   "status": "Operational",
-  "electrolysis_mt": 0.312,
-  "fossil_ccus_mt": 0.807
+  "electrolysis_mt": 0.302,
+  "fossil_ccus_mt": 0.78
  },
  {
   "status": "Final investment decision",
-  "electrolysis_mt": 2.125,
-  "fossil_ccus_mt": 1.162
+  "electrolysis_mt": 2.054,
+  "fossil_ccus_mt": 1.123
  },
  {
   "status": "Strong potential",
-  "electrolysis_mt": 1.133,
-  "fossil_ccus_mt": 0.652
+  "electrolysis_mt": 1.095,
+  "fossil_ccus_mt": 0.63
  },
  {
   "status": "Moderate potential",
-  "electrolysis_mt": 2.621,
-  "fossil_ccus_mt": 3.329
+  "electrolysis_mt": 2.534,
+  "fossil_ccus_mt": 3.218
  },
  {
   "status": "Low potential",
-  "electrolysis_mt": 2.153,
-  "fossil_ccus_mt": 0.623
+  "electrolysis_mt": 2.081,
+  "fossil_ccus_mt": 0.602
  },
  {
   "status": "Uncertain",
-  "electrolysis_mt": 13.017,
-  "fossil_ccus_mt": 0
+  "electrolysis_mt": 12.584,
+  "fossil_ccus_mt": 0.0
  }
 ]

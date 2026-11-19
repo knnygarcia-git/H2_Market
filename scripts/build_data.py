@@ -58,14 +58,19 @@ save('manufacturing_2030_announced', [
 # Figure 3.5, p. 87: low-emissions production by 2030 in announced projects (Mt H2)
 el = {'Europe': 5.595, 'Latin America': 4.349, 'Australia': 2.521, 'China': 2.323, 'India': 2.068, 'United States': 1.204, 'Middle East': 1.048, 'Canada': 0.581, 'Rest of world': 1.671}
 cc = {'Europe': 1.53, 'Latin America': 0, 'Australia': 0.411, 'China': 0.057, 'India': 0.014, 'United States': 3.669, 'Middle East': 0.269, 'Canada': 0.609, 'Rest of world': 0.014}
+# The bars read from the chart add up to 27.93 Mt, while the report text gives 27 Mt in total and 4.3 Mt committed
+# (p. 11 and p. 87); every value is scaled by the same factor so the totals match the text.
+K = 27 / 27.93
+el = {k: round(v * K, 3) for k, v in el.items()}
+cc = {k: round(v * K, 3) for k, v in cc.items()}
 save('pipeline_2030_by_region', [{'region': k, 'electrolysis_mt': el[k], 'fossil_ccus_mt': cc[k], 'total_mt': r2(el[k] + cc[k])} for k in el])
-save('pipeline_2030_by_status', [
+save('pipeline_2030_by_status', [{**r, 'electrolysis_mt': round(r['electrolysis_mt'] * K, 3), 'fossil_ccus_mt': round(r['fossil_ccus_mt'] * K, 3)} for r in [
     {'status': 'Operational', 'electrolysis_mt': 0.312, 'fossil_ccus_mt': 0.807},
     {'status': 'Final investment decision', 'electrolysis_mt': 2.125, 'fossil_ccus_mt': 1.162},
     {'status': 'Strong potential', 'electrolysis_mt': 1.133, 'fossil_ccus_mt': 0.652},
     {'status': 'Moderate potential', 'electrolysis_mt': 2.621, 'fossil_ccus_mt': 3.329},
     {'status': 'Low potential', 'electrolysis_mt': 2.153, 'fossil_ccus_mt': 0.623},
-    {'status': 'Uncertain', 'electrolysis_mt': 13.017, 'fossil_ccus_mt': 0}])
+    {'status': 'Uncertain', 'electrolysis_mt': 13.017, 'fossil_ccus_mt': 0}]])
 
 # Figure 6.2, p. 173: investment in low-emissions production installations (USD billion, 2025)
 inv = {2022: ((0.057, 0.131, 0.065, 0.417), (0.041, 0.164, 0.18, 0.065)), 2023: ((0.376, 0.008, 0.196, 0.949), (0.147, 0.466, 0.262, 0.09)),

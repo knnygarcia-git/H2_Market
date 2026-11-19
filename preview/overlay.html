@@ -9,12 +9,6 @@ html, body { overflow-x: hidden; }
 #vspot.on { opacity: 1; }
 .scr { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; font-family: 'Poppins', sans-serif; transition: opacity .7s; }
 .scr.off { opacity: 0; pointer-events: none; }
-#hook { background: radial-gradient(circle at 70% 20%, #1d3a6b 0%, #14204a 45%, #0b1230 100%); color: #fff; }
-#hook .line { text-wrap: balance; font-size: 46px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; max-width: 1000px; opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .8s; }
-#hook .line.in { opacity: 1; transform: none; }
-#hook .line.dim { opacity: .28; }
-#hook .line em { font-style: normal; color: #ffc20e; } #hook .line i { font-style: normal; color: #7fe0d6; }
-#hook .small { font-size: 22px; font-weight: 500; color: rgba(255,255,255,.75); }
 #card { background: #fff; }
 #card .k, .chap .k { font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: #00a99d; font-weight: 700; }
 #card h1 { margin: 0; font-size: 60px; font-weight: 700; letter-spacing: -.03em; color: #14204a; line-height: 1.1; }
@@ -48,8 +42,7 @@ html, body { overflow-x: hidden; }
 </style>
 <div id="vspot"></div>
 <div id="cap"></div>
-<div id="hook" class="scr"></div>
-<div id="card" class="scr off"><span class="k">IEA Global Hydrogen Review 2026</span><h1>The factories are ready.<br><span>The buyers are not.</span></h1><p>An interactive look at the global hydrogen market, and where Brazil fits in</p><div class="by"><img src="/me.jpg" alt=""><div><b>Kenny Yusimy Garcia Angarita</b><span>Data Analyst · linkedin.com/in/kennyyusimygarciaangarita</span></div></div></div>
+<div id="card" class="scr"><span class="k">IEA Global Hydrogen Review 2026</span><h1>The factories are ready.<br><span>The buyers are not.</span></h1><p>An interactive look at the global hydrogen market, and where Brazil fits in</p><div class="by"><img src="/me.jpg" alt=""><div><b>Kenny Yusimy Garcia Angarita</b><span>Data Analyst · linkedin.com/in/kennyyusimygarciaangarita</span></div></div></div>
 <div id="chap" class="scr chap off"><span class="n"></span><span class="k"></span><h2></h2></div>
 <div id="cta" class="scr off"><h2>Could Brazil make its own fertiliser with clean hydrogen?</h2><p>Search your country, switch the map lenses and take the guided tour. The data is all there.</p><span class="go">Explore the interactive dashboard →</span></div>
 <div id="outro" class="scr off"><div class="prof"><span class="k" style="font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:#626875;font-weight:600">Built by</span><img src="/me.jpg" alt="Kenny Yusimy Garcia Angarita"><span class="nm">Kenny Yusimy Garcia Angarita</span><span class="hl">Data Analyst · SQL · Python · Power BI · Azure · CRM, Retail & Predictive Analytics · Turning data into business decisions</span><span class="url"><span class="li">in</span>linkedin.com/in/kennyyusimygarciaangarita</span><p class="src">Source: IEA (2026), Global Hydrogen Review 2026, CC BY 4.0 · Chart values read from the report's figures</p></div></div>

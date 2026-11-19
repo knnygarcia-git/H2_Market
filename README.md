@@ -4,7 +4,7 @@ An interactive dashboard of the global hydrogen market, built from the IEA **Glo
 
 ![Dashboard screenshot](docs/screenshot.png)
 
-**Demo video:** [`docs/demo.mp4`](docs/demo.mp4) (under 3 minutes, 1080p, subtitles only)
+**Demo video:** [`docs/demo.mp4`](docs/demo.mp4) (2.5 minutes, 1080p, subtitles only)
 
 ## How the story is told
 
@@ -53,7 +53,7 @@ All datasets are in `data/`, one JSON file each, with the report page in `script
 | `low_emissions_production.json` | Low-emissions production by route and region | Figure 3.2 |
 | `electrolyser_capacity.json`, `electrolyser_capacity_by_region.json` | Installed electrolysis | Figure 3.8 |
 | `manufacturing_capacity.json`, `manufacturing_2030_announced.json` | Electrolyser factory capacity | Figure 3.11 |
-| `pipeline_2030_by_status.json`, `pipeline_2030_by_region.json` | 2030 project pipeline | Figure 3.5 |
+| `pipeline_2030_by_status.json`, `pipeline_2030_by_region.json` | 2030 project pipeline, scaled so the total matches the 27 Mt in the report text | Figure 3.5 |
 | `production_cost.json` | Production cost ranges | Figure 3.20 |
 | `investment.json` | Investment by region | Figure 6.2 |
 | `country_targets.json` | Progress towards national 2030 targets | Figure 7.3 |

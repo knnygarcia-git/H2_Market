@@ -1,56 +1,56 @@
 [
  {
   "region": "Europe",
-  "electrolysis_mt": 5.595,
-  "fossil_ccus_mt": 1.53,
-  "total_mt": 7.12
+  "electrolysis_mt": 5.409,
+  "fossil_ccus_mt": 1.479,
+  "total_mt": 6.89
  },
  {
   "region": "Latin America",
-  "electrolysis_mt": 4.349,
-  "fossil_ccus_mt": 0,
-  "total_mt": 4.35
+  "electrolysis_mt": 4.204,
+  "fossil_ccus_mt": 0.0,
+  "total_mt": 4.2
  },
  {
   "region": "Australia",
-  "electrolysis_mt": 2.521,
-  "fossil_ccus_mt": 0.411,
-  "total_mt": 2.93
+  "electrolysis_mt": 2.437,
+  "fossil_ccus_mt": 0.397,
+  "total_mt": 2.83
  },
  {
   "region": "China",
-  "electrolysis_mt": 2.323,
-  "fossil_ccus_mt": 0.057,
-  "total_mt": 2.38
+  "electrolysis_mt": 2.246,
+  "fossil_ccus_mt": 0.055,
+  "total_mt": 2.3
  },
  {
   "region": "India",
-  "electrolysis_mt": 2.068,
+  "electrolysis_mt": 1.999,
   "fossil_ccus_mt": 0.014,
-  "total_mt": 2.08
+  "total_mt": 2.01
  },
  {
   "region": "United States",
-  "electrolysis_mt": 1.204,
-  "fossil_ccus_mt": 3.669,
-  "total_mt": 4.87
+  "electrolysis_mt": 1.164,
+  "fossil_ccus_mt": 3.547,
+  "total_mt": 4.71
  },
  {
   "region": "Middle East",
-  "electrolysis_mt": 1.048,
-  "fossil_ccus_mt": 0.269,
-  "total_mt": 1.32
+  "electrolysis_mt": 1.013,
+  "fossil_ccus_mt": 0.26,
+  "total_mt": 1.27
  },
  {
   "region": "Canada",
-  "electrolysis_mt": 0.581,
-  "fossil_ccus_mt": 0.609,
-  "total_mt": 1.19
+  "electrolysis_mt": 0.562,
+  "fossil_ccus_mt": 0.589,
+  "total_mt": 1.15
  },
  {
   "region": "Rest of world",
-  "electrolysis_mt": 1.671,
+  "electrolysis_mt": 1.615,
   "fossil_ccus_mt": 0.014,
-  "total_mt": 1.69
+  "total_mt": 1.63
  }
 ]
