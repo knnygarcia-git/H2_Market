@@ -158,6 +158,63 @@
 .hx .bfact b { font-size: 28px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .hx .bfact b small { font-size: .5em; font-weight: 500; margin-left: 3px; letter-spacing: 0; }
 .hx .bfact > span { font-size: 12.5px; line-height: 1.5; opacity: .95; }
+/* storytelling layer: hook, chapters, insights, guided tour */
+.hx .story { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 18px; align-items: stretch; }
+.hx .story-text { background: var(--navy); color: #fff; border-radius: 22px; padding: clamp(20px, 3vw, 34px); display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
+.hx .story-text::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 169, 157, .55), rgba(0, 169, 157, 0) 70%); pointer-events: none; }
+.hx .kicker { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); }
+.hx .story-text .kicker { color: #7fe0d6; }
+.hx .story-text h1 { color: #fff; font-size: clamp(28px, 3.6vw, 46px); font-weight: 700; line-height: 1.08; }
+.hx .story-text h1 em { font-style: normal; color: var(--yellow); }
+.hx .story-text .lede { color: rgba(255, 255, 255, .82); font-size: 15.5px; }
+.hx .story-text .lede b { color: #fff; }
+.hx .story-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; position: relative; z-index: 1; }
+.hx .story-cta .btn { border: 0; cursor: pointer; font-family: inherit; }
+.hx .btn.play { background: var(--yellow); color: var(--navy); box-shadow: 0 10px 24px rgba(255, 194, 14, .35); }
+.hx .btn.ghost { background: transparent; color: #fff; box-shadow: none; border: 1.5px solid rgba(255, 255, 255, .4); }
+.hx .story-qs { border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.hx .story-qs > span { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.hx .story-qs a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: var(--soft); color: var(--ink); text-decoration: none; font-size: 13.5px; font-weight: 500; line-height: 1.35; transition: background .2s, transform .2s; }
+.hx .story-qs a:hover { background: #e9f6f4; transform: translateX(3px); }
+.hx .story-qs a b { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--navy); color: #fff; font-size: 12px; }
+.hx .story-qs a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.hx .why { display: flex; gap: 14px; align-items: flex-start; background: #fff7dc; border: 1px solid #ffe28a; border-radius: 18px; padding: 14px 18px; }
+.hx .why .ico { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--yellow); color: var(--navy); display: grid; place-items: center; font-weight: 700; }
+.hx .why p { font-size: 14px; line-height: 1.6; color: var(--ink); }
+.hx .why p b { color: var(--navy); }
+.hx .chapter { display: flex; align-items: center; gap: 16px; margin-top: 14px; padding-top: 22px; border-top: 1px dashed #dfe3ea; }
+.hx .chapter > b { flex: none; font-size: clamp(34px, 4vw, 48px); font-weight: 700; line-height: 1; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.5px var(--teal); }
+.hx .chapter span { display: block; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); }
+.hx .chapter h2 { font-size: clamp(19px, 2.2vw, 24px); font-weight: 600; color: var(--navy); letter-spacing: -.01em; margin-top: 2px; }
+.hx .insight { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; background: linear-gradient(120deg, #f2fbfa, #ffffff); border: 1px solid #cfeeea; border-left: 5px solid var(--teal); border-radius: 16px; padding: 14px 18px; }
+.hx .insight .tag { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+.hx .insight p { font-size: 14px; line-height: 1.6; color: var(--ink); }
+.hx .insight p b { color: var(--navy); }
+.hx .insight a { white-space: nowrap; font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--soft); }
+.hx .insight a:hover { background: #e9f6f4; }
+.hx .insight a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.hx .closing { background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .35); border-radius: 18px; padding: 16px 18px; display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.hx .closing p { font-size: 15px; line-height: 1.6; max-width: 70ch; }
+.hx .closing .btn { background: #fff; color: var(--navy); border: 0; cursor: pointer; font-family: inherit; }
+/* guided tour: a spotlight over the current card and a step card */
+.hx .tour-spot { position: fixed; z-index: 60; border-radius: 20px; box-shadow: 0 0 0 4px var(--yellow), 0 0 0 200vmax rgba(15, 22, 48, .62); pointer-events: none; transition: top .5s ease, left .5s ease, width .5s ease, height .5s ease; }
+.hx .tour-card { position: fixed; z-index: 61; right: 24px; bottom: 24px; width: min(380px, calc(100vw - 32px)); background: #fff; border-radius: 20px; padding: 18px 20px 16px; box-shadow: 0 24px 60px rgba(10, 16, 40, .35); display: flex; flex-direction: column; gap: 10px; }
+.hx .tour-card .step { display: flex; flex-direction: column; gap: 8px; }
+.hx .tour-card .step small { font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+.hx .tour-card .step h3 { font-size: 18px; font-weight: 700; color: var(--navy); }
+.hx .tour-card .step p { font-size: 14px; line-height: 1.6; color: var(--ink); }
+.hx .tour-card .step p b { color: var(--navy); }
+.hx .tour-card .ctrls { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+.hx .tour-card .ctrls button { font: inherit; font-size: 13px; font-weight: 600; border: 0; border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+.hx .tour-card .ctrls .next { background: var(--navy); color: #fff; margin-left: auto; }
+.hx .tour-card .ctrls .prev { background: var(--soft); color: var(--ink); }
+.hx .tour-card .ctrls .close { background: transparent; color: var(--muted); padding-inline: 8px; }
+.hx .tour-card .ctrls button:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.hx .tour-card .dots { display: flex; gap: 5px; }
+.hx .tour-card .dots i { width: 7px; height: 7px; border-radius: 50%; background: #dfe3ea; transition: background .3s, width .3s; }
+.hx .tour-card .dots i.on { background: var(--teal); width: 18px; border-radius: 4px; }
+@media (max-width: 900px) { .hx .story { grid-template-columns: minmax(0, 1fr); } .hx .insight { grid-template-columns: minmax(0, 1fr); } .hx .tour-card { right: 16px; bottom: 16px; } }
+@media (prefers-reduced-motion: reduce) { .hx .tour-spot, .hx .story-qs a { transition: none; } }
 /* paragraphs read as justified blocks */
 .hx p { text-align: justify; text-justify: inter-word; hyphens: auto; }
 .hx .gauge p { text-align: center; }
@@ -218,11 +275,25 @@
       <a class="user" href="https://www.linkedin.com/in/kennyyusimygarciaangarita/" target="_blank" rel="noopener"><img src="/_blob/3c13140c1875dee6d016c3a0d630744c" alt=""><span><b>Kenny Garcia Angarita</b><small>Data Analyst · LinkedIn</small></span></a>
     </div>
     <div class="crumbs" aria-label="Breadcrumb"><b>Workspace</b>›<b>Energy markets</b>›<b>Global Hydrogen Market 2026</b></div>
-    <div class="titlerow" id="overview">
-      <h1>Global Hydrogen Market 2026</h1>
-      <a class="btn" href="https://www.iea.org/reports/global-hydrogen-review-2026" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 2h5v5M14 2L7 9M12 9.5V14H2V4h4.5"/></svg>Open IEA report</a>
-    </div>
-    <p class="lede" id="takeaway">The world used <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=demand_2025">—</b> Mt of hydrogen in 2025, and only <b data-draw="gaugeval" data-source="gauges" data-field="pct" data-where="id=low_em">—</b>% of it was made with low emissions. Electrolysis capacity more than doubled, but factories can already build <b data-draw="overcap" data-source="overcapacity">—</b> times what projects are expected to install each year.</p>
+    <section class="story" id="overview">
+      <div class="story-text">
+        <span class="kicker">Global Hydrogen Market 2026 · IEA data</span>
+        <h1>The factories are ready. <em>The buyers are not.</em></h1>
+        <p class="lede" id="takeaway">The world used <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=demand_2025">—</b> Mt of hydrogen in 2025, and only <b data-draw="gaugeval" data-source="gauges" data-field="pct" data-where="id=low_em">—</b>% of it was made with low emissions. Electrolysis capacity more than doubled, but factories can already build <b data-draw="overcap" data-source="overcapacity">—</b> times what projects are expected to install each year.</p>
+        <div class="story-cta">
+          <button type="button" class="btn play" data-tour-start><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>Take the 2-minute tour</button>
+          <a class="btn ghost" href="https://www.iea.org/reports/global-hydrogen-review-2026" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 2h5v5M14 2L7 9M12 9.5V14H2V4h4.5"/></svg>Open IEA report</a>
+        </div>
+      </div>
+      <nav class="story-qs" aria-label="Questions this dashboard answers">
+        <span>Four questions, answered with data</span>
+        <a href="#trend"><b>01</b>Who uses hydrogen, and how clean is it?</a>
+        <a href="#world"><b>02</b>Which countries felt the 2026 fertiliser shock?</a>
+        <a href="#funnel"><b>03</b>Will the 2030 promises come true?</a>
+        <a href="#brazil"><b>04</b>Where does Brazil fit in?</a>
+      </nav>
+    </section>
+    <div class="why"><span class="ico" aria-hidden="true">!</span><p><b>Why now.</b> About half of the world's hydrogen goes into ammonia and methanol, and most ammonia ends up as fertiliser. When the Strait of Hormuz closed in 2026, urea prices doubled in a few months and granular urea in Brazil rose 60% in March alone. Hydrogen is no longer only a climate topic: it is on the farm and on the plate.</p></div>
 
     <section class="kpis" id="headline">
       <div class="kpi"><div class="kh"><i style="background: var(--yellow)"></i>Hydrogen demand</div><div class="kv"><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=demand_2025">—</span><small>Mt</small></div><div class="ticks" data-draw="ticks" data-source="kpi_strips" data-strip="demand" data-color="var(--yellow)"></div><span class="kc">Strip: 2025 against the IEA 2030 estimate</span></div>
@@ -231,6 +302,7 @@
       <div class="kpi"><div class="kh"><i style="background: var(--coral)"></i>Announced for 2030</div><div class="kv"><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=pipeline_2030">—</span><small>Mt</small></div><div class="ticks" data-draw="ticks" data-source="kpi_strips" data-strip="committed" data-color="var(--coral)"></div><span class="kc">Strip: share already committed</span></div>
     </section>
 
+    <div class="chapter"><b>01</b><div><span>The paradox</span><h2>Who uses hydrogen, and how clean is it?</h2></div></div>
     <div class="row" id="trend">
       <section class="card">
         <div class="chead">
@@ -259,6 +331,9 @@
         <div class="gauge"><div class="g chart" data-draw="gauge" data-source="gauges" data-gauge="committed"></div><p><b>Of the 2030 pipeline</b> running or with a final investment decision</p></div>
       </div>
     </section>
+    <aside class="insight"><span class="tag">Insight</span><p>Hydrogen is already a market of more than <b>100 Mt</b> a year, but a fossil one: unabated gas and coal make most of it and emit about <b>1,000 Mt of CO₂</b>. The question is not whether the world uses hydrogen, but whether it can make it clean.</p><a href="#world">Next: the fertiliser shock →</a></aside>
+
+    <div class="chapter"><b>02</b><div><span>The exposure</span><h2>Which countries felt the 2026 fertiliser shock?</h2></div></div>
   <section class="sec" id="world">
     <header>
       <div><h2>The world map of hydrogen</h2><p>Pick a lens, then point at or click any country. Brazil is selected to start: it has no national production target in the IEA comparison, but it is among the most exposed to imported fertiliser, and its region holds one of the largest renewable pipelines.</p></div>
@@ -292,13 +367,16 @@
       <p class="note" data-lens-note="targets pipeline" hidden>Dark bar: running or with a final investment decision. Light bar: adds projects with strong potential. * marks a production target (tonnes); the rest are electrolysis capacity targets (GW). Most countries are far from their targets.</p>
     </div>
   </section>
+    <aside class="insight"><span class="tag">Insight</span><p>Countries that import nearly all their fertiliser, much of it from the Middle East, were hit first. Making ammonia at home from clean hydrogen is not only about emissions: the IEA links it to <b>food security</b> and lower exposure to price swings.</p><a href="#funnel">Next: the 2030 promises →</a></aside>
 
+    <div class="chapter"><b>03</b><div><span>Promise vs reality</span><h2>Will the 2030 promises come true?</h2></div></div>
   <section class="sec" id="funnel">
     <header><div><h2>From announcement to reality</h2><p>Every project announced for 2030 adds up to almost <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=pipeline_2030">—</b> Mt a year of low-emissions hydrogen. Each step down the funnel keeps only the projects that got further.</p></div></header>
     <div class="funnel">
       <div class="bands" data-draw="bands" data-source="funnel"></div>
       <div class="card"><div class="chart" data-draw="funnelchart" data-source="funnel"></div></div>
     </div>
+    <aside class="insight"><span class="tag">The clock</span><p><b><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=at_risk">—</span> Mt</b> of announced production may lose any chance to start by 2030 if investment decisions are not taken by <b>early 2027</b>. Two-thirds of it is in Europe, North America and Latin America.</p><a href="#race">Next: the electrolyser race →</a></aside>
   </section>
 
   <section class="sec" id="race">
@@ -339,6 +417,9 @@
       </div>
     </section>
     </div>
+    <aside class="insight"><span class="tag">Missing piece</span><p>Supply is not the bottleneck: buyers are. New offtake agreements stayed at about <b><span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=offtake">—</span> Mt</b> in 2025, and only around 20% were firm commitments. The IEA calls demand for low-emissions hydrogen <b>"the crucial missing piece"</b> for the sector to take off.</p><a href="#cost">Next: follow the money →</a></aside>
+
+    <div class="chapter"><b>04</b><div><span>Follow the money</span><h2>How far is clean hydrogen from competing?</h2></div></div>
     <div class="row even">
   <section class="sec" id="cost">
     <header><div><h2>The cost gap</h2><p>Each line spans the cheapest to the most expensive region, today and in 2030 under current policies. Electrolysers cost <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=capex_china">—</b> USD/kW installed in China and <b data-draw="fact" data-source="key_facts" data-field="value" data-where="id=capex_row">—</b> USD/kW elsewhere.</p></div></header>
@@ -358,6 +439,7 @@
   </section>
 
     </div>
+    <div class="chapter"><b>05</b><div><span>Brazil's opportunity</span><h2>Where does Brazil fit in?</h2></div></div>
   <section class="brazil" id="brazil">
     <h2>Brazil in focus</h2>
     <p>Brazil imports most of its nitrogen fertiliser, so the conflict in the Middle East reached its farms directly. At the same time, Latin America holds one of the largest pipelines of renewable hydrogen projects in the world.</p>
@@ -368,9 +450,22 @@
       <div class="bfact"><b>$<span data-draw="fact" data-source="key_facts" data-field="value" data-where="id=pecem_loan">—</span><small>m</small></b><span>World Bank loan for ammonia infrastructure at the Port of Pecém</span></div>
       <div class="bfact"><b><span data-draw="latam" data-source="pipeline_2030_by_region" data-field="total_mt" data-where="region=Latin America">—</span><small>Mt</small></b><span>Low-emissions production announced in Latin America for 2030</span></div>
     </div>
+    <div class="closing"><p><b>The open question:</b> Brazil imports more urea than any other country, while Latin America has one of the largest pipelines of renewable hydrogen projects. Could Brazil make its own fertiliser with clean hydrogen? Search your country, switch the map lenses and draw your own conclusions.</p><button type="button" class="btn" data-tour-start>Replay the tour</button></div>
   </section>
 
-  <p class="foot" id="about">Source: IEA (2026), Global Hydrogen Review 2026, licence CC BY 4.0. Chart values were read from the vector graphics of the report's figures (pages in each source) and checked against the totals in its text; small rounding differences remain. Growth figures are computed from those chart values. 2026 figures are IEA estimates from projects under construction or with a final investment decision; 2030 figures are announcements and scenarios.</p>
+  <p class="foot" id="about">Source: IEA (2026), Global Hydrogen Review 2026, licence CC BY 4.0. Chart values were read from the vector graphics of the report's figures (pages in each source) and checked against the totals in its text; small rounding differences remain. Growth figures are computed from those chart values. 2026 figures are IEA estimates from projects under construction or with a final investment decision; 2030 figures are announcements and scenarios. The fertiliser shock, offtake and food-security notes quote the report text (pages 9, 13, 19, 22 and 59).</p>
+    <div class="tour-spot" data-tour-spot hidden></div>
+    <div class="tour-card" role="dialog" aria-label="Guided tour" data-tour-card hidden>
+      <div class="step" data-step="0" data-target="#headline" hidden><small>Step 1 of 8</small><h3>Start with the scale</h3><p>The world used <b>102 Mt</b> of hydrogen in 2025. Less than <b>1%</b> was made with low emissions. Each strip shows how far each number is from its next milestone.</p></div>
+      <div class="step" data-step="1" data-target="#trend" hidden><small>Step 2 of 8</small><h3>Who uses it, how it is made</h3><p>Demand keeps rising in industry and refining. Press <b>Production</b>: natural gas and coal still make almost all of it.</p></div>
+      <div class="step" data-step="2" data-target="#gauges" hidden><small>Step 3 of 8</small><h3>A small, concentrated, uncommitted market</h3><p>China holds <b>64%</b> of all electrolysers, and only <b>16%</b> of the 2030 pipeline is running or financed.</p></div>
+      <div class="step" data-step="3" data-target="#world .worldgrid" hidden><small>Step 4 of 8</small><h3>Who felt the fertiliser shock</h3><p>Pick a lens and click any country. Brazil imports <b>all</b> the urea it uses, <b>40%</b> of it from the Middle East. Try the search box at the top.</p></div>
+      <div class="step" data-step="4" data-target="#funnel" hidden><small>Step 5 of 8</small><h3>Promise vs reality</h3><p><b>27.9 Mt</b> of clean hydrogen is announced for 2030. Only <b>4.4 Mt</b> is committed, and <b>1.1 Mt</b> is running.</p></div>
+      <div class="step" data-step="5" data-target="#race" hidden><small>Step 6 of 8</small><h3>The electrolyser race</h3><p>China leads with <b>2.7 GW</b>. Press 2026e: Europe is set to roughly quadruple. Factories could already build <b>6.4×</b> what projects need.</p></div>
+      <div class="step" data-step="6" data-target="#cost" hidden><small>Step 7 of 8</small><h3>The cost gap</h3><p>Renewable hydrogen still costs from over <b>USD 3</b> to beyond <b>USD 10 per kg</b>; the best sites approach fossil costs by 2030.</p></div>
+      <div class="step" data-step="7" data-target="#brazil" hidden><small>Step 8 of 8</small><h3>Brazil's opportunity</h3><p>The largest urea importer in the world, a <b>USD 58 bn</b> industrial plan with <b>44</b> renewable hydrogen projects selected, and a region with <b>4.4 Mt</b> announced.</p></div>
+      <div class="ctrls"><div class="dots" aria-hidden="true"><i data-dot="0"></i><i data-dot="1"></i><i data-dot="2"></i><i data-dot="3"></i><i data-dot="4"></i><i data-dot="5"></i><i data-dot="6"></i><i data-dot="7"></i></div><button type="button" class="close" data-tour-close>Close</button><button type="button" class="prev" data-tour-prev>Back</button><button type="button" class="next" data-tour-next>Next</button></div>
+    </div>
   </main>
 </div>
 
@@ -471,10 +566,23 @@
   const reset = (el) => { el.replaceChildren(); };
 
   // ---- numbers in text
-  dash.draw('fact', (el) => { const rows = ok('key_facts'); const r = rows && pick(rows, el); el.textContent = r ? ff(r.value) : '—'; });
-  dash.draw('gaugeval', (el) => { const rows = ok('gauges'); const r = rows && pick(rows, el); el.textContent = r ? f1(r.pct) : '—'; });
-  dash.draw('overcap', (el) => { const v = ok('overcapacity'); el.textContent = v == null ? '—' : f1(v); });
-  dash.draw('latam', (el) => { const rows = ok('pipeline_2030_by_region'); const r = rows && pick(rows, el); el.textContent = r ? f1(r.total_mt) : '—'; });
+  // numbers count up the first time they scroll into view
+  const counted = new WeakSet();
+  const countUp = (el, v, fmt) => {
+    if (v == null) { el.textContent = '—'; return; }
+    if (counted.has(el) || !motion() || !('IntersectionObserver' in window)) { el.textContent = fmt(v); return; }
+    counted.add(el); el.textContent = fmt(0);
+    const io = new IntersectionObserver((es) => { if (!es.some((e) => e.isIntersecting)) return; io.disconnect();
+      const t0 = performance.now(), D = 1100;
+      const step = (t) => { const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(k < 1 ? v * e : v); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step); }, { threshold: 0.6 });
+    io.observe(el);
+  };
+  const fmtLike = (v) => (x) => Number.isInteger(v) ? new Intl.NumberFormat('en-US').format(Math.round(x)) : ff(Math.round(x * 100) / 100);
+  dash.draw('fact', (el) => { const rows = ok('key_facts'); const r = rows && pick(rows, el); countUp(el, r ? r.value : null, fmtLike(r ? r.value : 0)); });
+  dash.draw('gaugeval', (el) => { const rows = ok('gauges'); const r = rows && pick(rows, el); countUp(el, r ? r.pct : null, f1); });
+  dash.draw('overcap', (el) => { const v = ok('overcapacity'); countUp(el, v, f1); });
+  dash.draw('latam', (el) => { const rows = ok('pipeline_2030_by_region'); const r = rows && pick(rows, el); countUp(el, r ? r.total_mt : null, f1); });
 
   // ---- curved growth arrows
   dash.draw('arrows', (el) => {
@@ -966,5 +1074,35 @@
     const w = document.getElementById('world'); if (w) w.scrollIntoView({ behavior: motion() ? 'smooth' : 'auto', block: 'start' });
     mark('world');
   }));
+
+  // guided tour: spotlight the card of each step and scroll it into view
+  const spot = document.querySelector('[data-tour-spot]'), card = document.querySelector('[data-tour-card]');
+  const steps = [...document.querySelectorAll('[data-tour-card] .step')];
+  let cur = -1, raf = 0;
+  const target = () => (cur >= 0 ? document.querySelector(steps[cur].dataset.target) : null);
+  const place = () => { raf = 0; const t = target(); if (!t) return; const r = t.getBoundingClientRect(), pad = 8;
+    Object.assign(spot.style, { top: (r.top - pad) + 'px', left: (r.left - pad) + 'px', width: (r.width + 2 * pad) + 'px', height: (r.height + 2 * pad) + 'px' }); };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(place); };
+  const go = (i) => {
+    cur = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((s, k) => { s.hidden = k !== cur; });
+    card.querySelectorAll('[data-dot]').forEach((d, k) => d.classList.toggle('on', k === cur));
+    card.querySelector('[data-tour-prev]').style.visibility = cur ? 'visible' : 'hidden';
+    card.querySelector('[data-tour-next]').setAttribute('aria-label', cur === steps.length - 1 ? 'Finish the tour' : 'Next step');
+    const t = target();
+    if (t) { const r = t.getBoundingClientRect(), off = r.height > innerHeight * 0.7 ? 20 : (innerHeight - r.height) / 2;
+      window.scrollTo({ top: Math.max(0, r.top + scrollY - off), behavior: motion() ? 'smooth' : 'auto' }); }
+    queue(); setTimeout(queue, 450); setTimeout(queue, 900);
+  };
+  const open = () => { spot.hidden = false; card.hidden = false; go(0); card.querySelector('[data-tour-next]').focus({ preventScroll: true }); };
+  const close = () => { cur = -1; spot.hidden = true; card.hidden = true; };
+  document.querySelectorAll('[data-tour-start]').forEach((b) => b.addEventListener('click', open));
+  card.querySelector('[data-tour-close]').addEventListener('click', close);
+  card.querySelector('[data-tour-prev]').addEventListener('click', () => go(cur - 1));
+  card.querySelector('[data-tour-next]').addEventListener('click', () => (cur === steps.length - 1 ? close() : go(cur + 1)));
+  addEventListener('scroll', () => { if (cur >= 0) queue(); }, { passive: true });
+  addEventListener('resize', () => { if (cur >= 0) queue(); });
+  document.addEventListener('keydown', (ev) => { if (cur < 0) return;
+    if (ev.key === 'Escape') close(); else if (ev.key === 'ArrowRight') go(cur + 1); else if (ev.key === 'ArrowLeft') go(cur - 1); });
 })();
 </script>

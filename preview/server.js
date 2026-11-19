@@ -38,13 +38,13 @@ const mock = `
 
 const extra = fs.existsSync(path.join(__dirname, 'overlay.html')) ? fs.readFileSync(path.join(__dirname, 'overlay.html'), 'utf8') : '';
 
-const harness = () => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+const harness = (demo) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Global Hydrogen Market 2026</title>
 <style>html, body { margin: 0; background: #fff; } body { font: 14px/1.5 system-ui, sans-serif; }</style>
 <script src="/d3.js"></script>${mock}
 </head><body>
 <div id="dash-root">${fs.readFileSync(path.join(ROOT, 'dashboard/index.html'), 'utf8')}</div>
-${extra}
+${demo ? extra : ''}
 </body></html>`;
 
 const files = {
@@ -56,7 +56,7 @@ const files = {
 
 http.createServer((req, res) => {
   const u = req.url.split('?')[0];
-  if (u === '/') { res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }); return res.end(harness()); }
+  if (u === '/') { res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }); return res.end(harness(/[?&]demo\b/.test(req.url))); }
   const f = files[u];
   if (!f || !fs.existsSync(f[0])) { res.writeHead(404); return res.end(); }
   res.writeHead(200, { 'content-type': f[1] }); res.end(fs.readFileSync(f[0]));

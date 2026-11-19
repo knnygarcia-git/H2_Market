@@ -4,7 +4,17 @@ An interactive dashboard of the global hydrogen market, built from the IEA **Glo
 
 ![Dashboard screenshot](docs/screenshot.png)
 
-**Demo video:** [`docs/demo.mp4`](docs/demo.mp4) (3 minutes, 1080p, subtitles only)
+**Demo video:** [`docs/demo.mp4`](docs/demo.mp4) (under 3 minutes, 1080p, subtitles only)
+
+## How the story is told
+
+The dashboard is built as a story, not only as a set of charts:
+
+- **A hook:** *The factories are ready. The buyers are not.* Four questions in the header jump straight to the answers.
+- **Why now:** the 2026 closure of the Strait of Hormuz doubled urea prices, and hydrogen sits behind most of the world's nitrogen fertiliser.
+- **Five chapters:** the paradox, the exposure, promise vs reality, follow the money and Brazil's opportunity. Each ends with an insight and a link to the next one.
+- **A guided tour:** eight steps that spotlight each chart in turn (arrow keys and Esc work too).
+- **Numbers that count up** as they scroll into view, and a closing question for the reader.
 
 ## What's in the dashboard
 
@@ -67,7 +77,7 @@ python scripts/build_data.py data
 node scripts/build_world_shapes.mjs . data/world_shapes.json   # needs world-atlas, topojson-client and d3-geo
 ```
 
-To record the demo video again (needs Playwright with Chromium and ffmpeg):
+To record the demo video again (needs Playwright with Chromium and ffmpeg). The recorder opens `/?demo`, which adds the video's title cards, chapter cards and captions on top of the page:
 
 ```bash
 node preview/server.js &
